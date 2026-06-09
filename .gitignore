@@ -1,0 +1,8 @@
+.DS_Store
+*.m4b
+*.mp3
+*.wav
+*.pdf
+node_modules/
+.vscode/
+.idea/
