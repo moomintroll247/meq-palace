@@ -1,7 +1,7 @@
 // MEQ Palace service worker.
 // Stale-while-revalidate: serve from cache instantly, fetch in background to refresh.
 // Bump CACHE_VERSION to force evict old caches.
-const CACHE_VERSION = 'meq-palace-v4';
+const CACHE_VERSION = 'meq-palace-v5';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
