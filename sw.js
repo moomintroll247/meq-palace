@@ -2,7 +2,7 @@
 // NETWORK-FIRST for the main document (index.html) so code updates apply immediately when
 // online; stale-while-revalidate for other assets. Falls back to cache when offline.
 // Bump CACHE_VERSION to force evict old caches.
-const CACHE_VERSION = 'meq-palace-v25';
+const CACHE_VERSION = 'meq-palace-v26';
 const ASSETS = ['./', './index.html', './manifest.json',
                 './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
 
