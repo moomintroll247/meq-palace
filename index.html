@@ -10564,7 +10564,7 @@ const HUNTS = [
     `Discovery One (XIX · Treatments) — Jupiter Approach: the clozapine indication — how many antipsychotics must have failed? The blood-monitoring schedule, and the parameter that stops the drug? The four potentially fatal adverse effects (cardiac, haematological, bowel, neurological)?`,
     `Far Harbour (I · ADHD) — diagnosing the adult: what must be established about CHILDHOOD and SETTINGS to diagnose adult ADHD? Before starting a stimulant, what must you screen for? The diversion / misuse concern? (The Lighthouse itself encodes psychoeducation, not the diagnosis.)`,
   ] },
-  { id: 7, reps: 0, title: 'Scavenger Hunt 7', questions: [
+  { id: 7, reps: 1, title: 'Scavenger Hunt 7', questions: [
     `Helios (IV · Depression) — the Bell Tower: the first-line indications for ECT? Which one is a true emergency? The main side effect (and what you tell the patient)? Any absolute contraindications?`,
     `The Overlook (V · Bipolar) — the Colorado Lounge: how do you treat bipolar DEPRESSION, and what's the trap? The agents with evidence? The risk of reaching for an antidepressant?`,
     `Arrakis (VII · Substance) — the Hunter-Seeker Pavilion: managing acute methamphetamine intoxication / agitation? Distinguishing meth-induced psychosis from schizophrenia? Is there a substitution pharmacotherapy?`,
@@ -93752,7 +93752,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v31 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v32 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
