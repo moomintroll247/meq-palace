@@ -10894,14 +10894,14 @@ const ANCHORS = {
     { id: 'fo8', live: false, fact: `Custodial mental health: very high rates of mental illness, self-harm and substance use; screen at reception; the prison owes a duty of care.  [Submarine]` },
   ] },
   substance: { label: 'VII · Substance — Arrakis', list: [
-    { id: 'su1', live: false, fact: `In alcohol withdrawal give PARENTERAL THIAMINE BEFORE any glucose, or a glucose load precipitates Wernicke's encephalopathy.  [Spice Distillery]` },
+    { id: 'su1', live: true, fact: `In alcohol withdrawal give PARENTERAL THIAMINE BEFORE any glucose, or a glucose load precipitates Wernicke's encephalopathy.  [Spice Distillery]` },
     { id: 'su2', live: false, fact: `Alcohol-withdrawal severity is scored with CIWA-Ar; benzodiazepines (diazepam / chlordiazepoxide) are the mainstay of treatment.  [Spice Distillery]` },
     { id: 'su3', live: false, fact: `Opioid substitution = methadone or buprenorphine (Suboxone = bup + naloxone); induction is gated by COWS; take-home NALOXONE reverses overdose.  [Suk Doctor's Hospice]` },
-    { id: 'su4', live: false, fact: `Motivational interviewing — the SPIRIT is partnership · acceptance · compassion · evocation; skills are OARS; avoid the "righting reflex".  [Fremen Council Tent]` },
+    { id: 'su4', live: true, fact: `Motivational interviewing — the SPIRIT is partnership · acceptance · compassion · evocation; skills are OARS; avoid the "righting reflex".  [Fremen Council Tent]` },
     { id: 'su5', live: false, fact: `Stimulant (methamphetamine) intoxication/psychosis: manage with a benzodiazepine ± antipsychotic; there is NO approved substitution pharmacotherapy.  [Hunter-Seeker Pavilion]` },
     { id: 'su6', live: false, fact: `Smoking induces CYP1A2 → lowers clozapine/olanzapine levels; STOPPING smoking raises them (toxicity risk).  [Tleilaxu Tank]` },
     { id: 'su7', live: true, fact: `Sedative / GHB withdrawal can be life-threatening (seizures, delirium) — never stop abruptly; use a long taper.  [Tleilaxu Tank]` },
-    { id: 'su8', live: false, fact: `Cannabis has a dose-dependent association with psychosis — strongest with high-THC use and early-adolescent onset.  [Sand-Hash Bazaar]` },
+    { id: 'su8', live: true, fact: `Cannabis has a dose-dependent association with psychosis — strongest with high-THC use and early-adolescent onset.  [Sand-Hash Bazaar]` },
   ] },
   cl: { label: 'XIII · Consultation-Liaison — Rear Window', list: [
     { id: 'cl1', live: false, fact: `HYPOACTIVE delirium is the killer — it's missed (looks like depression) and carries the higher mortality.  [Dog Couple]` },
@@ -93752,7 +93752,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v32 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v33 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
