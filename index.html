@@ -10576,6 +10576,18 @@ const HUNTS = [
     `Hogwarts (XVI · Governance) — the Owlery: when must you make a MANDATORY notification to AHPRA? The four categories of "notifiable conduct"? The threshold — and the wrinkle for treating practitioners?`,
     `ISIS HQ (XX · Misc) — Malory's Boardroom: factitious disorder vs malingering — the motivation in each? Where "Munchausen" fits? Factitious disorder imposed on another, and your duty if you suspect it?`,
   ] },
+  { id: 8, reps: 0, title: 'Scavenger Hunt 8', questions: [
+    `Krazy Times (III · Schizophrenia) — Swan Lake: which PSYCHOSOCIAL interventions have evidence? Which targets employment (and the model)? What does CBT for psychosis aim to do?`,
+    `Helios (IV · Depression) — the Cliff Path: in a structured suicide risk assessment, what do you assess? Static vs dynamic vs protective factors? The single strongest predictor of completed suicide?`,
+    `Oz (VIII · Personality) — the Tin Man: the three Cluster C personality disorders? And the classic trap — how does OCPD differ from OCD?`,
+    `Blade Runner (X · Old Age) — the Establishing Rooftop: how do you tell the dementia subtypes apart? The discriminating feature for Alzheimer's, vascular, Lewy body, and frontotemporal?`,
+    `Neverland (XI · C&A) — Tinkerbell: assessing/managing adolescent deliberate self-poisoning / self-harm? Can you diagnose BPD before 18, and the stance? The therapeutic-relationship principle?`,
+    `Country (XIV · Cultural) — the Coastal Boats: which MH problems are over-represented in refugees/asylum seekers? The impact of immigration detention (on whom most)? The RANZCP position?`,
+    `Hogwarts (XVI · Governance) — the DADA Classroom: the process after a serious clinical incident? What a Severity Assessment Code (SAC) does? Root Cause Analysis, and the model behind it?`,
+    `Holy Grail (XVII · MHA) — the French Castle: what is the Mental Health Tribunal and what does it decide? Who sits on the panel? The patient's rights at a hearing?`,
+    `Discovery One (XIX · Treatments) — HAL 9000: what is iatrogenic harm + common prescribing errors? What is deprescribing, and when? The anchoring principle (down on the savanna)?`,
+    `ISIS HQ (XX · Misc) — Krieger's Lab: what is "diagnostic overshadowing" and why does it bite in intellectual disability? How might mental illness present differently in ID? A key consideration for autism diagnosed in adulthood?`,
+  ] },
 ];
 const hengeGlyphs = [];
 let hengeNearGlyph = null;
@@ -93752,7 +93764,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v33 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v34 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
