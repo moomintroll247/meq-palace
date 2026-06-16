@@ -3482,9 +3482,13 @@ Each Lost Boy presents differently.
 
 **DSM-5 explicitly permits BPD diagnosis in adolescence** if features have been present ≥1 year and are pervasive (against earlier reluctance to diagnose <18 — but features now well-validated).
 
+**Early intervention is the modern stance** — the Australian **HYPE model (Helping Young People Early; Orygen, Chanen)**: early diagnosis + early access to evidence-based treatment improves the long-term trajectory. The old "don't label before 18" stance denies care during the developmental window when BPD is most malleable; naming + treating early is now best practice.
+
 **Adolescent BPD**: identity diffusion (more than developmental identity work), unstable intense relationships, affective lability, **deliberate self-harm + suicidal behaviour**, chronic emptiness, impulsivity, micro-psychotic stress episodes — same 9 DSM-5 criteria as adult, applied with developmental sensitivity.
 
 **Self-harm in adolescents**: 1-in-5 cutting at some point; majority not suicidal; functions = emotion regulation, communication, dissociation interruption, identity, peer-bonding, distress signalling.
+
+**Acute deliberate self-poisoning — sequence**: **medically stabilise first** (paracetamol is the #1 adolescent agent — acute/staggered levels against the nomogram, **NAC**; ECG + bloods as indicated), THEN a **biopsychosocial + risk assessment once medically clear** (function of the act, intent, capacity, family + school context, collateral), THEN **collaborative safety planning + lethal-means restriction + follow-up**. Don't formulate the psychiatry before the airway/levels are sorted.
 
 **DBT-A (DBT for Adolescents)** has best evidence — adapts adult DBT modules + adds adolescent + family modules; multi-family skills group + individual + phone coaching; reduces self-harm + hospitalisations.
 
@@ -3492,10 +3496,15 @@ Each Lost Boy presents differently.
 
 **Pharmacotherapy** for adolescent BPD: limited; no medication treats BPD itself; symptom-targeted only (SSRI for comorbid depression, mood stabiliser for impulsivity); **avoid benzodiazepines** (paradoxical disinhibition + diversion + dependence); **lethal-means restriction** at home (lock the paracetamol).
 
-**Self-harm + social media + contagion** in adolescents is real — peer self-harm contagion in schools requires school-wide response.`,
+**Self-harm + social media + contagion** in adolescents is real — peer self-harm contagion in schools requires school-wide response.
+
+**The therapeutic relationship is the lifeline** (this station's anchor — Tinkerbell only revives when she is *believed in*): a **validating, consistent, reliable, non-judgmental** stance. **Manage your countertransference** — emerging-BPD adolescents evoke rescue, rejection, and over-involvement; **ruptures are inevitable and repairing them IS the therapy**. **No-suicide contracts are not evidence-based and may harm** — use collaborative safety planning instead.`,
     why:  `### Justifications
 
 - **DSM-5 explicitly permits BPD diagnosis in adolescence** — withholding the diagnosis denies access to evidence-based treatment (DBT-A).
+- **Early intervention (HYPE model, Orygen/Chanen)** improves the long-term trajectory — diagnose and treat in the developmental window rather than waiting until 18.
+- **Stabilise the overdose before you formulate the psychiatry** — medical management (paracetamol levels + NAC) precedes the biopsychosocial/risk assessment, which precedes safety planning; reversing the order kills people.
+- **The therapeutic relationship is itself the treatment** — a validating, consistent, non-judgmental stance with active countertransference management; rupture-and-repair is therapeutic, and no-suicide contracts are not evidence-based and may harm.
 - **DBT-A** has the strongest RCT evidence for reducing self-harm and hospitalisation in adolescents with BPD features.
 - **MBT-A** is an additional evidence-supported alternative — useful when DBT-A is unavailable or unsuitable.
 - **No medication treats BPD itself** — pharmacotherapy is symptom-targeted only; this prevents polypharmacy.
@@ -93764,7 +93773,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v35 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v36 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
