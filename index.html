@@ -10576,7 +10576,7 @@ const HUNTS = [
     `Hogwarts (XVI · Governance) — the Owlery: when must you make a MANDATORY notification to AHPRA? The four categories of "notifiable conduct"? The threshold — and the wrinkle for treating practitioners?`,
     `ISIS HQ (XX · Misc) — Malory's Boardroom: factitious disorder vs malingering — the motivation in each? Where "Munchausen" fits? Factitious disorder imposed on another, and your duty if you suspect it?`,
   ] },
-  { id: 8, reps: 0, title: 'Scavenger Hunt 8', questions: [
+  { id: 8, reps: 1, title: 'Scavenger Hunt 8', questions: [
     `Krazy Times (III · Schizophrenia) — Swan Lake: which PSYCHOSOCIAL interventions have evidence? Which targets employment (and the model)? What does CBT for psychosis aim to do?`,
     `Helios (IV · Depression) — the Cliff Path: in a structured suicide risk assessment, what do you assess? Static vs dynamic vs protective factors? The single strongest predictor of completed suicide?`,
     `Oz (VIII · Personality) — the Tin Man: the three Cluster C personality disorders? And the classic trap — how does OCPD differ from OCD?`,
@@ -93764,7 +93764,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v34 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v35 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
