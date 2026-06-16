@@ -10597,6 +10597,18 @@ const HUNTS = [
     `Discovery One (XIX · Treatments) — HAL 9000: what is iatrogenic harm + common prescribing errors? What is deprescribing, and when? The anchoring principle (down on the savanna)?`,
     `ISIS HQ (XX · Misc) — Krieger's Lab: what is "diagnostic overshadowing" and why does it bite in intellectual disability? How might mental illness present differently in ID? A key consideration for autism diagnosed in adulthood?`,
   ] },
+  { id: 9, reps: 0, title: 'Scavenger Hunt 9', questions: [
+    `Far Harbor (I · Adult ADHD) — the Abandoned Tackle Store: baseline physical screen before a stimulant? When specifically an ECG? Which conditions make you hold off?`,
+    `Bethlem (II · ED Presentations) — the Capacity Sign: the four components of a capacity assessment? Who carries the presumption? Is an unwise decision incapacity? "Patient refused" without a documented capacity assessment is…?`,
+    `Stars Hollow (VI · Anxiety/OCD) — Luke's Diner: what does the anxiety/OCD-specific MSE focus on? OCD washing vs BDD appearance; catastrophising vs intrusions. Why is insight the prognostic key?`,
+    `The Nostromo (IX · Eating Disorders) — the Cargo Bay: name MARSIPAN admission thresholds (hard numbers)? Mechanism of refeeding syndrome + the electrolyte that kills? Prevention (kcal start, monitoring, thiamine)? The actual treatment?`,
+    `Rear Window (XIII · CL) — the Dog Couple: the cardinal feature of delirium? Which subtype is "the killer", mistaken for what, and why higher mortality? A bedside screen? First-line management + the benzodiazepine rule and its exception?`,
+    `Mad Men (XVIII · Ethics) — the Conference Room: what makes consent "informed" (incl. the element candidates drop)? The teach-back method? How narrow is therapeutic privilege? What is informed financial consent?`,
+    `The Overlook (V · Bipolar) — the Lithium Dial: therapeutic range (maintenance vs acute mania) + toxicity threshold? Baseline + ongoing monitoring? What precipitates toxicity? Key long-term side effects?`,
+    `Arrakis (VII · Substance) — the Spice Distillery: alcohol-withdrawal timeline (seizures, DTs)? CIWA-guided benzo dosing + which benzo in liver impairment and why? Thiamine before glucose — why? Wernicke's triad → what untreated? AUD pharmacotherapies + which in cirrhosis?`,
+    `Spirited Away (XII · Perinatal) — the Bath for the River Spirit: why is postpartum psychosis THE perinatal emergency (onset/presentation)? The big diagnostic association + treatment implication? Two major risks? Acute management — where and with what?`,
+    `Raiders (XV · Forensic) — the Map Room of Tanis: what legal question — the test and the case? Threshold high or low? Who can raise it? How does it differ from criminal responsibility (the Well of Souls)?`,
+  ] },
 ];
 const hengeGlyphs = [];
 let hengeNearGlyph = null;
@@ -93773,7 +93785,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v36 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v37 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
