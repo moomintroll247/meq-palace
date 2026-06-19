@@ -8211,6 +8211,16 @@ const WORLDS = {
     fogColor: 0x0e0a06, fogNear: 18, fogFar: 46,
     skyColor: 0x070503,
   },
+  // The Dungeon — case library (vignette "prisoners"). Reached via each prisoner's
+  // sigil portal on the related islands; returns you to the island you came from.
+  dungeon: {
+    name: 'dungeon',
+    spawn: new THREE.Vector3(0, 4800 + 1.7, 9),
+    floor: () => 4800,
+    bounds: { xMin: -3.6, xMax: 3.6, zMin: -11.4, zMax: 11.4 },
+    fogColor: 0x2a2218, fogNear: 22, fogFar: 90,
+    skyColor: 0x050403,
+  },
   asylum: {
     name: 'asylum',
     // origin Y is high-up, like the hub, so the asylum coexists in the same scene
@@ -8509,6 +8519,7 @@ const MISC_Y = 4000;
 const STONEHENGE_Y = 4200;
 const GLADE_Y = 4400;
 const REFLECTION_Y = 4600;
+const DUNGEON_Y = 4800;
 const CRYPT_Y = 180;
 let currentWorld = 'hub';
 const portals = [];
@@ -8643,6 +8654,7 @@ function setWorldVisibility() {
   if (STONEHENGE_ROOT) STONEHENGE_ROOT.visible = (currentWorld === 'stonehenge');
   if (GLADE_ROOT) GLADE_ROOT.visible = (currentWorld === 'glade');
   if (REFLECTION_ROOT) REFLECTION_ROOT.visible = (currentWorld === 'reflection');
+  if (DUNGEON_ROOT) DUNGEON_ROOT.visible = (currentWorld === 'dungeon');
   for (const child of scene.children) {
     if (child === HUB_ROOT || child === ASYLUM_ROOT || child === FAIRGROUND_ROOT || child === DEPRESSION_ROOT || child === BIPOLAR_ROOT || child === ANXIETY_ROOT || child === SUBSTANCE_ROOT || child === PERSONALITY_ROOT || child === EATING_ROOT || child === OLDAGE_ROOT || child === CANDA_ROOT || child === PERINATAL_ROOT || child === CL_ROOT || child === CULTURAL_ROOT || child === FORENSIC_ROOT || child === GOVERNANCE_ROOT || child === MHA_ROOT || child === ETHICS_ROOT || child === TREATMENTS_ROOT || child === MISC_ROOT || child === CRYPT_ROOT) continue;
     if (child.isLight) continue;
@@ -8687,6 +8699,7 @@ function setWorldVisibility() {
     else if (currentWorld === 'stonehenge') info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>The Henge — Scavenger Hunts</p>';
     else if (currentWorld === 'glade') info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>The Glade — Islands of Meaning</p>';
     else if (currentWorld === 'reflection') info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>The Analysis Room — Compare &amp; Contrast</p>';
+    else if (currentWorld === 'dungeon') info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>The Dungeon — Cases</p>';
     else if (currentWorld === 'crypt') info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>The Crypt — Lower Hall</p>';
     else info.innerHTML = '<h1>MEQ MEMORY PALACE</h1><p>Adult ADHD — Island I</p>';
   }
@@ -9077,6 +9090,7 @@ let CRYPT_ROOT = null;
 let STONEHENGE_ROOT = null;
 let GLADE_ROOT = null;
 let REFLECTION_ROOT = null;
+let DUNGEON_ROOT = null;
 function buildHub() {
   const HUB_LENGTH = 36;     // along z (entry at +z, far end at -z)
   const HUB_WIDTH = 12;      // along x
@@ -11657,6 +11671,235 @@ function buildReflection() {
   }
 }
 __activeTickerWorld = 'reflection'; buildReflection(); __activeTickerWorld = '_global';
+
+// =====================================================================
+// THE DUNGEON — case library. Vignette "prisoners"; type→reveal console.
+// New world at DUNGEON_Y; entered via the prisoner's sigil portals planted
+// on related islands (islandDoors return-to-door brings you back). Self-mark,
+// ephemeral. Full content: Dungeon/_dungeon_spec.md + Dungeon/prisoner_*.md
+// =====================================================================
+const PRISONERS = [
+  {
+    id: 'adil', name: 'Adil',
+    blurb: 'refugee · schizophrenia · IV heroin · ?endocarditis · refusing treatment',
+    stem: `You are a junior consultant psychiatrist on a Consultation-Liaison team in a metropolitan hospital. Adil is a 32-year-old single Afghan refugee with schizophrenia and intravenous heroin misuse, under a community team on a depot antipsychotic. He agreed to admission for suspected infective endocarditis, but has since refused all tests and tried to leave the ward. You are asked to assess his treatment refusal.`,
+    subQs: [
+      {
+        ask: `Outline (list and justify) the factors that might be contributing to Adil's treatment refusal.`,
+        marks: 10,
+        skeleton: `Patient factors · Illness factors · Systems factors`,
+        groups: [
+          { h: 'Patient factors', lines: [
+            `Language barrier — because without an interpreter he may not understand the tests, so refusal may be non-comprehension, not an informed decline.`,
+            `Cultural / explanatory model — because a non-Western or spiritual model changes what "treatment" means to him.`,
+            `Health literacy & insight — because how well he grasps his condition decides whether the refusal is informed.`,
+            `Residency fear — because a refugee may fear a diagnosis threatens his visa: a rational, addressable driver.`,
+            `Trauma / mistrust of authorities — because detention and distrust of the team drive flight; personality contributes.`,
+            `External obligations — because commitments and financial concerns pull him to leave.`,
+          ]},
+          { h: 'Illness factors', lines: [
+            `Untreated / substance-induced psychosis — because it can distort his appraisal of the medical risk.`,
+            `Depression — because hopelessness reduces motivation for treatment.`,
+            `Delirium — because an acute confusional state from infection explains refusal and is a reversible emergency to exclude first.`,
+            `Opioid withdrawal — because agitation, restlessness and confusion drive him to leave.`,
+            `Other physical illness — because malnourishment, pain or intoxication/craving alter his choices.`,
+            `Cognitive impairment from schizophrenia — because it affects capacity to weigh the decision.`,
+          ]},
+          { h: 'Systems factors', lines: [
+            `Paternalistic team — because a non-collaborative approach invites reactance; person-centred re-approach may resolve it.`,
+            `Cultural-safety gap — because a team lacking culturally safe practice fails to engage him.`,
+            `Stigma / negative countertransference — because attitudes to "refugee + substance + mental illness" rupture engagement.`,
+            `Family / social isolation — because restrictive visiting and isolation remove his supports.`,
+          ]},
+        ],
+        thinFact: `Capacity is decision-specific — refusal does not equal incapacity. Assess understand / retain / weigh / communicate for THIS decision; if he lacks it, a physical illness goes via a medical-consent substitute decision-maker, not the Mental Health Act.`,
+      },
+      {
+        ask: `(He consents, is treated, but a week later appears sad, quiet and preoccupied, sleeping poorly for over three months.) Outline (list and justify) the points you would consider in your review of his current presentation.`,
+        marks: 12,
+        skeleton: `Mood · Sleep · Physical · Trauma/stress · Psychosocial · Substance · Psychosis · Delirium`,
+        groups: [
+          { h: 'Review domains', lines: [
+            `Mood — differentiate a major depressive episode from a substance-related mood episode (methadone under/over-treatment); screen mania and psychotic features. Because the diagnosis dictates different management.`,
+            `Sleep — characterise (initial/middle/early-morning); weigh methadone, withdrawal, hygiene, apnoea. Because over three months may be depression or a primary sleep disorder.`,
+            `Physical health — liaise with the medical team re endocarditis course, prognosis, malnourishment. Because mental state cannot be read apart from the infection.`,
+            `Trauma & stress — PTSD / complex PTSD, adjustment, grief, dissociation. Because a refugee's quietness may be trauma, not depression.`,
+            `Psychosocial — poverty, housing, food insecurity, safety, connectedness, re-traumatisation. Because they drive presentation and plan.`,
+            `Comorbid substance — undeclared / OTC use, changed pattern. Because it shifts the differential and risk.`,
+            `Psychosis exacerbation — review hallucinations/delusions under stress; establish baseline and whether this differs. Because deterioration may be relapse, not low mood.`,
+            `Delirium — from endocarditis and complications (thrombosis, stroke). Because it is a reversible emergency masquerading as withdrawal.`,
+          ]},
+        ],
+        thinFact: `In a medically unwell patient who goes flat and quiet, exclude delirium and the medical course FIRST before labelling depression — and methadone dosing itself can generate a mood picture.`,
+      },
+    ],
+  },
+];
+
+let dungeonNearConsole = false;
+let dungeonOverlayOpen = false;
+let dungeonPrisoner = null;
+let dungeonSubIdx = 0;
+
+function dungeonOpen(pid) {
+  const p = PRISONERS.find(x => x.id === pid); if (!p) return;
+  dungeonPrisoner = p; dungeonSubIdx = 0;
+  const ov = document.getElementById('dungeonOverlay'); if (!ov) return;
+  if (typeof reflOverlayOpen !== 'undefined' && reflOverlayOpen) reflClose();
+  dungeonRender(false);
+  ov.style.display = 'flex'; dungeonOverlayOpen = true;
+  try { document.exitPointerLock(); } catch (e) {}
+}
+function dungeonEsc(s) { return String(s).replace(/[<>]/g, c => c === '<' ? '&lt;' : '&gt;'); }
+function dungeonRender(revealed) {
+  const ov = document.getElementById('dungeonOverlay'); if (!ov) return;
+  const p = dungeonPrisoner; const q = p.subQs[dungeonSubIdx];
+  const multi = p.subQs.length > 1;
+  let html =
+    '<p style="margin:0 0 2px; color:#b08050; font-size:12px; letter-spacing:2px;">CASE FILE — PRISONER</p>' +
+    '<h2 style="margin:0 0 6px; color:#e8c080;">' + p.name + ' <span style="color:#9a8a70; font-size:14px; font-style:italic;">— ' + p.blurb + '</span></h2>' +
+    '<p style="margin:0 0 14px; padding:11px 14px; background:#1a1410; border-left:3px solid #6a4a28; border-radius:4px; color:#d8c8b0; font-style:italic;">' + p.stem + '</p>' +
+    '<p style="margin:0 0 6px; color:#f0d8a8;"><b>Q' + (dungeonSubIdx + 1) + '.</b> ' + q.ask + ' <span style="color:#b08050;">(' + q.marks + ' marks)</span></p>' +
+    '<p style="margin:0 0 10px; color:#9a8a70; font-size:13px; font-style:italic;">List + justify = WHAT + WHY. A list with no justification scores zero.</p>';
+  if (!revealed) {
+    html +=
+      '<textarea id="dungeonAnswer" placeholder="Type your answer — domains, with a because for each…" style="width:100%; box-sizing:border-box; min-height:150px; padding:10px 12px; background:#0c0906; color:#e8dcc8; border:1px solid #5a4428; border-radius:6px; font:15px Georgia,serif; resize:vertical;"></textarea>' +
+      '<div style="margin-top:10px;">' +
+      '<button id="dungeonReveal" style="padding:9px 16px; margin:0 8px 8px 0; background:#a8722e; color:#100a04; border:none; border-radius:6px; font:bold 14px Georgia,serif; cursor:pointer;">Reveal model answer</button>' +
+      '<button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>' +
+      '</div>';
+  } else {
+    const taEl = document.getElementById('dungeonAnswer');
+    const typed = taEl ? taEl.value : '';
+    html += '<p style="margin:14px 0 4px; color:#b08050; font-size:12px; letter-spacing:2px;">MODEL ANSWER — self-mark against it</p>';
+    html += '<p style="margin:0 0 10px; color:#c8b890;"><b>Skeleton:</b> ' + q.skeleton + '</p>';
+    for (const g of q.groups) {
+      html += '<div style="margin:0 0 10px; padding:10px 12px; background:#140f0a; border-left:3px solid #7a5a30; border-radius:4px;"><b style="color:#e8c080;">' + g.h + '</b><ul style="margin:6px 0 0; padding-left:18px; color:#d8c8b0;">' + g.lines.map(l => '<li style="margin:0 0 5px;">' + l + '</li>').join('') + '</ul></div>';
+    }
+    html += '<p style="margin:0 0 14px; padding:10px 12px; background:#11261a; border:1px solid #2f5a3f; border-radius:4px; color:#bfe8cc;"><b>Thin fact:</b> ' + q.thinFact + '</p>';
+    if (typed.trim()) html += '<details style="margin:0 0 12px; color:#9a8a70;"><summary style="cursor:pointer;">your answer</summary><pre style="white-space:pre-wrap; font:14px Georgia,serif; color:#c8b8a0;">' + dungeonEsc(typed) + '</pre></details>';
+    html += '<div>';
+    if (multi && dungeonSubIdx < p.subQs.length - 1) html += '<button id="dungeonNext" style="padding:9px 16px; margin:0 8px 8px 0; background:#a8722e; color:#100a04; border:none; border-radius:6px; font:bold 14px Georgia,serif; cursor:pointer;">Next sub-question →</button>';
+    html += '<button id="dungeonRetry" style="padding:9px 16px; margin:0 8px 8px 0; background:#1a1410; color:#e8c080; border:1px solid #5a4428; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">↻ Try again</button>';
+    html += '<button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>';
+    html += '</div>';
+  }
+  ov.querySelector('.dbody').innerHTML = html;
+  const rev = ov.querySelector('#dungeonReveal'); if (rev) rev.addEventListener('click', () => dungeonRender(true));
+  const nxt = ov.querySelector('#dungeonNext'); if (nxt) nxt.addEventListener('click', () => { dungeonSubIdx++; dungeonRender(false); });
+  const rty = ov.querySelector('#dungeonRetry'); if (rty) rty.addEventListener('click', () => dungeonRender(false));
+  ov.querySelectorAll('.dungeonCloseBtn').forEach(b => b.addEventListener('click', dungeonClose));
+  const ta = ov.querySelector('#dungeonAnswer'); if (ta) setTimeout(() => { try { ta.focus(); } catch (e) {} }, 30);
+}
+function dungeonClose() { const ov = document.getElementById('dungeonOverlay'); if (ov) ov.style.display = 'none'; dungeonOverlayOpen = false; }
+function dungeonTryActivate() {
+  if (currentWorld !== 'dungeon') return;
+  if (dungeonOverlayOpen) { dungeonClose(); return; }
+  if (dungeonNearConsole) dungeonOpen(dungeonNearConsole);
+}
+
+function makeAdilSigil() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const x = c.getContext('2d'); x.clearRect(0, 0, 256, 256);
+  const cx = 128, cy = 124, s = 72;
+  x.fillStyle = '#c0303a';
+  x.beginPath();
+  x.moveTo(cx, cy + s * 0.62);
+  x.bezierCurveTo(cx - s, cy - s * 0.2, cx - s * 0.5, cy - s * 0.92, cx, cy - s * 0.34);
+  x.bezierCurveTo(cx + s * 0.5, cy - s * 0.92, cx + s, cy - s * 0.2, cx, cy + s * 0.62);
+  x.fill();
+  x.strokeStyle = '#15110c'; x.lineWidth = 11; x.lineCap = 'round';
+  for (const bx of [cx - 45, cx - 15, cx + 15, cx + 45]) { x.beginPath(); x.moveTo(bx, cy - 80); x.lineTo(bx, cy + 74); x.stroke(); }
+  x.strokeStyle = '#dadce4'; x.lineWidth = 6; x.beginPath(); x.moveTo(cx - 90, cy - 90); x.lineTo(cx + 72, cy + 60); x.stroke();
+  x.fillStyle = '#9aa0b0'; x.save(); x.translate(cx - 90, cy - 90); x.rotate(Math.PI / 4); x.fillRect(-11, -6, 22, 12); x.restore();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+
+function buildDungeon() {
+  const root = new THREE.Group();
+  root.position.set(0, DUNGEON_Y, 0);
+  scene.add(root);
+  DUNGEON_ROOT = root;
+  const W = 4, D = 12;
+  const stone = new THREE.MeshStandardMaterial({ color: 0x5a5048, roughness: 0.95 });
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(W * 2, 0.3, D * 2), new THREE.MeshStandardMaterial({ color: 0x3c362e, roughness: 0.96 }));
+  floor.position.y = -0.15; root.add(floor);
+  const ceil = new THREE.Mesh(new THREE.BoxGeometry(W * 2, 0.3, D * 2), stone); ceil.position.y = 4.2; root.add(ceil);
+  const mkWall = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), stone); m.position.set(x, y, z); root.add(m); };
+  mkWall(W * 2, 4.2, 0.3, 0, 2.1, -D);
+  mkWall(W * 2, 4.2, 0.3, 0, 2.1, D);
+  mkWall(0.3, 4.2, D * 2, W, 2.1, 0);
+  mkWall(0.3, 4.2, D * 2, -W, 2.1, 0);
+  root.add(new THREE.HemisphereLight(0x6a6048, 0x141008, 1.15));
+  root.add(new THREE.AmbientLight(0x504431, 1.3));
+  function torch(tx, tz) {
+    const fl = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 6), new THREE.MeshBasicMaterial({ color: 0xffae50 }));
+    fl.position.set(tx, 2.95, tz); root.add(fl);
+    const pl = new THREE.PointLight(0xffc070, 2.4, 22); pl.position.set(tx, 2.95, tz); root.add(pl);
+    tickers.push(t => { pl.intensity = 1.0 + Math.sin(t * 0.012 + tx) * 0.18 + Math.sin(t * 0.03 + tz) * 0.1; fl.scale.setScalar(0.9 + Math.sin(t * 0.02 + tx) * 0.12); });
+  }
+  torch(-W + 0.4, 6); torch(W - 0.4, 0); torch(-W + 0.4, -6); torch(W - 0.4, 6); torch(W - 0.4, -6);
+  // Adil's cell on the west wall — barred niche + slumped figure + sigil
+  const cellZ = -2;
+  const barMat = new THREE.MeshStandardMaterial({ color: 0x3a3a40, roughness: 0.6, metalness: 0.6 });
+  for (let i = 0; i < 7; i++) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 3.2, 8), barMat); bar.position.set(-W + 0.45, 1.6, cellZ - 1.5 + i * 0.5); root.add(bar); }
+  for (const by of [0.45, 2.85]) { const cb = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 3.2), barMat); cb.position.set(-W + 0.45, by, cellZ); root.add(cb); }
+  const figMat = new THREE.MeshStandardMaterial({ color: 0x4a4038, roughness: 0.95 });
+  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.26, 0.5, 4, 8), figMat); torso.position.set(-W + 0.2, 0.6, cellZ + 0.4); torso.rotation.z = 0.6; root.add(torso);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), figMat); head.position.set(-W + 0.55, 0.85, cellZ + 0.4); root.add(head);
+  const sigTex = makeAdilSigil();
+  const plaque = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), new THREE.MeshBasicMaterial({ map: sigTex, transparent: true }));
+  plaque.position.set(-W + 0.32, 3.4, cellZ); plaque.rotation.y = Math.PI / 2; root.add(plaque);
+  // the confession terminal — interaction point, facing east toward the player
+  const cg = new THREE.Group(); cg.position.set(-2.0, 0, cellZ); cg.rotation.y = Math.PI / 2; root.add(cg);
+  const lectern = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.1, 0.7), new THREE.MeshStandardMaterial({ color: 0x241c14, roughness: 0.9 })); lectern.position.y = 0.55; cg.add(lectern);
+  const slantTop = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.5, 0.06), new THREE.MeshBasicMaterial({ color: 0x0e2a18 })); slantTop.position.set(0, 1.16, 0.18); slantTop.rotation.x = -0.6; cg.add(slantTop);
+  const cglow = new THREE.PointLight(0x60ff90, 0.5, 5); cglow.position.set(0, 1.3, 0.3); cg.add(cglow);
+  tickers.push(t => { cglow.intensity = (dungeonOverlayOpen ? 0.9 : 0.45) + Math.sin(t * 0.02) * 0.1; });
+  // placard near spawn
+  const lc = document.createElement('canvas'); lc.width = 512; lc.height = 256;
+  { const x = lc.getContext('2d'); x.fillStyle = '#140d07'; x.fillRect(0, 0, 512, 256); x.strokeStyle = '#6a4a28'; x.lineWidth = 5; x.strokeRect(6, 6, 500, 244); x.textAlign = 'center'; x.fillStyle = '#e8c080'; x.font = 'bold 30px Georgia, serif'; x.fillText('THE CELLS', 256, 46); x.fillStyle = '#d8c8b0'; x.font = '18px Georgia, serif'; x.fillText('Each prisoner is a real exam case.', 256, 90); x.fillText('Activate the terminal (E or the button).', 256, 120); x.fillText('Type your answer, then reveal the model.', 256, 150); x.fillStyle = '#9a8a70'; x.font = 'italic 17px Georgia, serif'; x.fillText('Self-mark. The same sigil marks every', 256, 194); x.fillText('island this case touches.', 256, 218); }
+  const ltex = new THREE.CanvasTexture(lc); ltex.colorSpace = THREE.SRGBColorSpace;
+  const placard = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.3), new THREE.MeshBasicMaterial({ map: ltex })); placard.position.set(W - 0.12, 2.2, 6); placard.rotation.y = -Math.PI / 2; root.add(placard);
+  addReturnPortal({ x: 0, baseY: DUNGEON_Y, z: 10.4, rotY: 0, label: 'Leave the Dungeon' });
+  if (!document.getElementById('dungeonOverlay')) {
+    const ov = document.createElement('div'); ov.id = 'dungeonOverlay';
+    ov.style.cssText = 'display:none; position:fixed; inset:0; z-index:60; background:rgba(6,4,2,0.9); align-items:center; justify-content:center; font-family:Georgia,serif;';
+    ov.innerHTML = '<div style="max-width:660px; max-height:84vh; overflow-y:auto; background:#0e0a06; border:2px solid #6a4a28; border-radius:10px; padding:24px 30px; color:#d8c8b0; box-shadow:0 0 44px rgba(0,0,0,0.8);"><div class="dbody"></div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) dungeonClose(); });
+    const btn = document.createElement('button'); btn.id = 'dungeonActivateBtn'; btn.textContent = '▶  Open the case file  (E)';
+    btn.style.cssText = 'display:none; position:fixed; left:50%; bottom:140px; transform:translateX(-50%); z-index:55; padding:12px 22px; background:rgba(168,114,46,0.95); color:#140d07; border:none; border-radius:8px; font:bold 16px Georgia,serif; cursor:pointer;';
+    btn.addEventListener('click', dungeonTryActivate); document.body.appendChild(btn);
+  }
+}
+__activeTickerWorld = 'dungeon'; buildDungeon(); __activeTickerWorld = '_global';
+
+// Adil's sigil portals — one per island his case touches (the cross-association kicker).
+function addPrisonerSigil(worldName, sx, sy, sz, pid) {
+  const g = new THREE.Group(); g.position.set(sx, sy, sz); scene.add(g);
+  const tex = makeAdilSigil();
+  const sigMat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthWrite: false });
+  const sigA = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), sigMat); g.add(sigA);
+  const sigB = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), sigMat); sigB.rotation.y = Math.PI / 2; g.add(sigB); // crossed → face-on from any angle
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.9, 0.07, 8, 32), new THREE.MeshBasicMaterial({ color: 0xff3048 })); g.add(ring);
+  // NO real PointLight — the beacon is self-lit basic material. Always-on point lights here
+  // inflated every world's light count and darkened light-heavy islands (e.g. XIII).
+  const beamMat = new THREE.MeshBasicMaterial({ color: 0xff2840, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false });
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.6, 30, 12, 1, true), beamMat); beam.position.y = 13.3; g.add(beam); // floor → 30m, a findable landmark
+  const orb = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshBasicMaterial({ color: 0xff3048 })); orb.position.y = 28; g.add(orb);
+  tickers.push(t => { g.rotation.y = t * 0.0005; beamMat.opacity = 0.22 + Math.sin(t * 0.003) * 0.08; });
+  portals.push({ pos: new THREE.Vector3(sx, sy, sz), radius: 1.6, fire: () => fadeAndTeleport('dungeon') });
+}
+// Planted ~3m from the case-relevant station on each island (world coords x, y, z), not at spawn.
+__activeTickerWorld = 'fairground'; addPrisonerSigil('fairground', 16, 601.7, 23,  'adil'); // nr II Ferris Wheel (psychosis landmark)
+__activeTickerWorld = 'depression'; addPrisonerSigil('depression',  3, 808.7, -2,  'adil'); // nr IV The Pharmacy (mood vs substance)
+__activeTickerWorld = 'substance';  addPrisonerSigil('substance',   8, 1401.7, -9, 'adil'); // nr V The Suk Doctor (OST / withdrawal)
+__activeTickerWorld = 'cl';         addPrisonerSigil('cl',          0, 2601.7, -10, 'adil'); // central courtyard, nr VII Thorwald's Window (delirium)
+__activeTickerWorld = 'cultural';   addPrisonerSigil('cultural',    7, 2801.7, -20, 'adil'); // nr VII Coastal Boats (refugee MH)
+__activeTickerWorld = 'mha';        addPrisonerSigil('mha',        -6, 3401.7, 22,  'adil'); // nr II Capacity Assessment
+__activeTickerWorld = '_global';
+
 
 // ---------- asylum island (Island II — Bethlem-style ruined asylum) ----------
 function buildAsylum() {
@@ -92409,7 +92652,7 @@ if (IS_TOUCH) {
   stick.addEventListener('touchcancel', endStick);
 
   const eBtn = document.getElementById('touchE');
-  eBtn.addEventListener('touchstart', e => { e.preventDefault(); tryInteract(); if (currentWorld === 'reflection') reflTryActivate(); }, { passive: false });
+  eBtn.addEventListener('touchstart', e => { e.preventDefault(); tryInteract(); if (currentWorld === 'reflection') reflTryActivate(); if (currentWorld === 'dungeon') dungeonTryActivate(); }, { passive: false });
   eBtn.addEventListener('click', e => e.preventDefault());
   // Q = read/collect a Henge hunt (anywhere); R = the Glade fairy draw / re-read.
   const qBtn = document.getElementById('touchQ');
@@ -93581,14 +93824,22 @@ function updateAudio() {
 
 const keys = {};
 document.addEventListener('keydown', e => {
+  // While typing into the dungeon console textarea, don't let keystrokes drive the
+  // game (WASD/E/Q/R). Only Escape acts — to close the console.
+  if (e.target && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) {
+    if (e.code === 'Escape' && dungeonOverlayOpen) dungeonClose();
+    return;
+  }
   keys[e.code] = true;
   if (e.code === 'KeyE') tryInteract();
   if (e.code === 'KeyQ') hengeTryRead();
   if (e.code === 'KeyR') gladeTryRead();
   if (e.code === 'KeyE' && currentWorld === 'reflection') reflTryActivate();
+  if (e.code === 'KeyE' && currentWorld === 'dungeon') dungeonTryActivate();
   if (e.code === 'Escape' && hengeOverlayOpen) hengeCloseOverlay();
   if (e.code === 'Escape' && gladeOverlayOpen) gladeCloseOverlay();
   if (e.code === 'Escape' && reflOverlayOpen) reflClose();
+  if (e.code === 'Escape' && dungeonOverlayOpen) dungeonClose();
   if (e.code === 'ArrowUp' || e.code === 'ArrowDown' || e.code === 'ArrowLeft' || e.code === 'ArrowRight') e.preventDefault();
 });
 document.addEventListener('keyup', e => keys[e.code] = false);
@@ -93785,7 +94036,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v37 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v38 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
@@ -93886,6 +94137,14 @@ function animate() {
       (Math.hypot(camera.position.x - 0, camera.position.z - (-2.5)) < 3.4);
     const btn = document.getElementById('reflActivateBtn');
     if (btn) btn.style.display = (!IS_TOUCH && reflNearConsole && !reflOverlayOpen) ? 'block' : 'none';
+  }
+
+  // Dungeon console proximity + the on-screen "Open the case file" button.
+  {
+    dungeonNearConsole = ((currentWorld === 'dungeon') &&
+      (Math.hypot(camera.position.x - (-2.0), camera.position.z - (-2)) < 3.0)) ? 'adil' : false;
+    const btn = document.getElementById('dungeonActivateBtn');
+    if (btn) btn.style.display = (!IS_TOUCH && dungeonNearConsole && !dungeonOverlayOpen) ? 'block' : 'none';
   }
 
   // Per-world light culler — keep only the N nearest dynamic lights enabled (forward-render cost).
