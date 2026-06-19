@@ -11674,9 +11674,9 @@ __activeTickerWorld = 'reflection'; buildReflection(); __activeTickerWorld = '_g
 
 // =====================================================================
 // THE DUNGEON — case library. Vignette "prisoners"; type→reveal console.
-// New world at DUNGEON_Y; entered via the prisoner's sigil portals planted
-// on related islands (islandDoors return-to-door brings you back). Self-mark,
-// ephemeral. Full content: Dungeon/_dungeon_spec.md + Dungeon/prisoner_*.md
+// Multi-cell: one cell per prisoner, each with a distinct sigil planted as
+// a portal on the islands its case touches. Self-mark, ephemeral.
+// Content grounded in real keys (Adil) / Tareq-graded mock answers (Mock 1).
 // =====================================================================
 const PRISONERS = [
   {
@@ -11686,60 +11686,321 @@ const PRISONERS = [
     subQs: [
       {
         ask: `Outline (list and justify) the factors that might be contributing to Adil's treatment refusal.`,
-        marks: 10,
-        skeleton: `Patient factors · Illness factors · Systems factors`,
+        marks: 10, skeleton: `Patient factors · Illness factors · Systems factors`,
         groups: [
-          { h: 'Patient factors', lines: [
-            `Language barrier — because without an interpreter he may not understand the tests, so refusal may be non-comprehension, not an informed decline.`,
-            `Cultural / explanatory model — because a non-Western or spiritual model changes what "treatment" means to him.`,
-            `Health literacy & insight — because how well he grasps his condition decides whether the refusal is informed.`,
-            `Residency fear — because a refugee may fear a diagnosis threatens his visa: a rational, addressable driver.`,
-            `Trauma / mistrust of authorities — because detention and distrust of the team drive flight; personality contributes.`,
-            `External obligations — because commitments and financial concerns pull him to leave.`,
+          { h: 'Patient', lines: [
+            `Language barrier — because without an interpreter refusal may be non-comprehension, not informed decline.`,
+            `Cultural / explanatory model — because a non-Western or spiritual model changes what "treatment" means.`,
+            `Residency fear — because a refugee may fear a diagnosis threatens his visa.`,
+            `Trauma / mistrust of authorities — because detention and distrust drive flight.`,
           ]},
-          { h: 'Illness factors', lines: [
-            `Untreated / substance-induced psychosis — because it can distort his appraisal of the medical risk.`,
-            `Depression — because hopelessness reduces motivation for treatment.`,
-            `Delirium — because an acute confusional state from infection explains refusal and is a reversible emergency to exclude first.`,
-            `Opioid withdrawal — because agitation, restlessness and confusion drive him to leave.`,
-            `Other physical illness — because malnourishment, pain or intoxication/craving alter his choices.`,
-            `Cognitive impairment from schizophrenia — because it affects capacity to weigh the decision.`,
+          { h: 'Illness', lines: [
+            `Untreated / substance-induced psychosis — because it distorts appraisal of the medical risk.`,
+            `Delirium — because an acute confusional state explains refusal and is a reversible emergency to exclude first.`,
+            `Opioid withdrawal — because agitation and confusion drive him to leave.`,
           ]},
-          { h: 'Systems factors', lines: [
-            `Paternalistic team — because a non-collaborative approach invites reactance; person-centred re-approach may resolve it.`,
-            `Cultural-safety gap — because a team lacking culturally safe practice fails to engage him.`,
+          { h: 'Systems', lines: [
+            `Paternalistic team — because a non-collaborative approach invites reactance.`,
             `Stigma / negative countertransference — because attitudes to "refugee + substance + mental illness" rupture engagement.`,
-            `Family / social isolation — because restrictive visiting and isolation remove his supports.`,
           ]},
         ],
-        thinFact: `Capacity is decision-specific — refusal does not equal incapacity. Assess understand / retain / weigh / communicate for THIS decision; if he lacks it, a physical illness goes via a medical-consent substitute decision-maker, not the Mental Health Act.`,
+        thinFact: `Capacity is decision-specific — refusal does not equal incapacity. If he lacks it, a physical illness goes via a medical-consent substitute decision-maker, not the Mental Health Act.`,
       },
       {
-        ask: `(He consents, is treated, but a week later appears sad, quiet and preoccupied, sleeping poorly for over three months.) Outline (list and justify) the points you would consider in your review of his current presentation.`,
-        marks: 12,
-        skeleton: `Mood · Sleep · Physical · Trauma/stress · Psychosocial · Substance · Psychosis · Delirium`,
-        groups: [
-          { h: 'Review domains', lines: [
-            `Mood — differentiate a major depressive episode from a substance-related mood episode (methadone under/over-treatment); screen mania and psychotic features. Because the diagnosis dictates different management.`,
-            `Sleep — characterise (initial/middle/early-morning); weigh methadone, withdrawal, hygiene, apnoea. Because over three months may be depression or a primary sleep disorder.`,
-            `Physical health — liaise with the medical team re endocarditis course, prognosis, malnourishment. Because mental state cannot be read apart from the infection.`,
-            `Trauma & stress — PTSD / complex PTSD, adjustment, grief, dissociation. Because a refugee's quietness may be trauma, not depression.`,
-            `Psychosocial — poverty, housing, food insecurity, safety, connectedness, re-traumatisation. Because they drive presentation and plan.`,
-            `Comorbid substance — undeclared / OTC use, changed pattern. Because it shifts the differential and risk.`,
-            `Psychosis exacerbation — review hallucinations/delusions under stress; establish baseline and whether this differs. Because deterioration may be relapse, not low mood.`,
-            `Delirium — from endocarditis and complications (thrombosis, stroke). Because it is a reversible emergency masquerading as withdrawal.`,
-          ]},
-        ],
-        thinFact: `In a medically unwell patient who goes flat and quiet, exclude delirium and the medical course FIRST before labelling depression — and methadone dosing itself can generate a mood picture.`,
+        ask: `(He consents, is treated, but a week later appears sad, quiet and preoccupied, sleeping poorly for over three months.) Outline (list and justify) the points you would consider in your review.`,
+        marks: 12, skeleton: `Mood · Sleep · Physical · Trauma · Psychosocial · Substance · Psychosis · Delirium`,
+        groups: [{ h: 'Review domains', lines: [
+          `Mood — differentiate a major depressive episode from a substance-related (methadone) mood episode. Because the diagnosis dictates management.`,
+          `Sleep — methadone, withdrawal, hygiene, apnoea. Because over three months may be depression or a primary sleep disorder.`,
+          `Physical health — liaise re endocarditis course and malnourishment. Because mental state can't be read apart from the infection.`,
+          `Trauma & stress — PTSD / complex PTSD. Because a refugee's quietness may be trauma, not depression.`,
+          `Psychosis exacerbation — establish baseline and whether this differs. Because deterioration may be relapse.`,
+          `Delirium — from endocarditis / its complications. Because it's a reversible emergency masquerading as withdrawal.`,
+        ]}],
+        thinFact: `In a medically unwell patient who goes flat and quiet, exclude delirium and the medical course FIRST before labelling depression.`,
+      },
+    ],
+  },
+  {
+    id: 'madelaine', name: 'Madelaine',
+    blurb: 'schizophrenia 8y · breakthrough voices · EPSE on risperidone · wants a med change',
+    stem: `You are a junior consultant at a community mental health service. Madelaine, 36, has had schizophrenia for 8 years with good adherence, but continues to have frequent distressing auditory hallucinations on risperidone 6mg. She previously did well on olanzapine but ceased it for weight gain, and now has significant extrapyramidal side effects. She requests a change of medication.`,
+    subQs: [
+      {
+        ask: `Outline (list and justify) the key information you require to address Madelaine's request.`,
+        marks: 12, skeleton: `Her perspective · psychosis-in-context · treatment history · side-effects · risk & capacity · social/who-else`,
+        groups: [{ h: 'Information', lines: [
+          `Her reason for the request — because each reason (EPSE, sexual side-effects, efficacy, insight, command hallucinations) leads to a different intervention. Start here.`,
+          `Characterise the psychosis in full context, not the voices alone — because persistent voices despite adherence mean treatment resistance, wrong diagnosis, or comorbidity, and two of those won't answer to antipsychotics.`,
+          `Her relapse signature — because cross-titration is a high-relapse window; her prodrome lets the team intervene early.`,
+          `Full antipsychotic history — because it establishes treatment resistance (≥2 trials → clozapine), flags agents to re-challenge, and stops repeating a failure.`,
+          `What was done about the olanzapine weight gain — because if never actively managed, a re-challenge with metabolic support is back on the table.`,
+          `Characterise the EPSE objectively (AIMS, Barnes) and screen prolactin — because you must measure what you treat, and raised prolactin is a common undisclosed reason to switch.`,
+          `Metabolic + cardiac baseline (BMI, lipids, glucose, ECG/QTc), substances, MSE & risk — because any switch carries metabolic/cardiac risk and the request may be psychotically driven.`,
+          `Capacity for this decision + Mental Health Act status; social supports, case manager, family (an angry mother is coming) — because if voluntary and capacitous she leads it.`,
+        ]}],
+        thinFact: `A bare list scores zero — every point needs a because. Start with HER perspective; never assess a symptom in isolation.`,
+      },
+      {
+        ask: `Outline (list and justify) the key examination and investigation findings you would require to reassess Madelaine.`,
+        marks: 6, skeleton: `Physical · neuro (EPSE) · cognitive · mental state · investigations`,
+        groups: [{ h: 'Examination & Ix', lines: [
+          `Physical / metabolic exam (vitals, BMI, waist, cardiovascular) — baseline before a likely switch; clozapine carries myocarditis risk.`,
+          `Neurological exam for EPSE — Parkinsonism, with AIMS (tardive dyskinesia) and Barnes (akathisia).`,
+          `Cognitive / frontal-lobe testing — chronic schizophrenia carries cognitive impairment; the College expects it.`,
+          `Mental state examination — current symptoms, comorbidity, risk (the commonly-missed domain).`,
+          `Investigations — prolactin, FBE (clozapine prerequisite), U&E/LFT/metabolic, ECG/QTc, pregnancy test; anti-NMDA antibodies if treatment-resistant.`,
+        ]}],
+        thinFact: `"Examination" means physical AND mental state — don't read it as physical only.`,
+      },
+      {
+        ask: `Outline (list and justify) the treatment options you would discuss for the stiffness and tremor.`,
+        marks: 3, skeleton: `Biological · psychological · social`,
+        groups: [{ h: 'Options', lines: [
+          `Pharmacological — an anticholinergic (e.g. benztropine) opposes nigrostriatal blockade; or switch to a lower-EPSE agent (aripiprazole / clozapine); or reduce the dose if mental state permits.`,
+          `Functional — OT assessment of the impact on activities of daily living.`,
+          `Psychological — CBT for the shame and negative self-image the symptoms generate.`,
+        ]}],
+        thinFact: `"Treatment options" = biopsychosocial, not just pharmacology — that breadth is the smart move.`,
+      },
+      {
+        ask: `(She starts clozapine; reports one hot/cold episode; QTc has risen 428→492ms but troponin, CK and exam are normal.) Outline (list and justify) the approaches to management you would consider.`,
+        marks: 6, skeleton: `Assess first · ranked options · throughout`,
+        groups: [{ h: 'Approaches', lines: [
+          `Assess first — repeat/serial ECG & QTc, serial troponin/CK/CRP/FBE, obs incl. temperature, consult cardiology + the clozapine service, MSE & risk. Because management = assessment then treatment.`,
+          `First choice: cautious continuation at the current dose with intensified monitoring — because the findings don't mandate cessation and clozapine is best-evidence for treatment resistance; premature withdrawal risks relapse + cholinergic rebound.`,
+          `Second: hold or reduce the dose if findings progress. Reserved: cease only for clear myocarditis or serious harm.`,
+          `Throughout: shared decision-making (and the mother, with consent), red-flag psychoeducation, and maintain hope — never say "her only hope".`,
+        ]}],
+        thinFact: `"Management" = assess then treat — don't jump to treatment; and never say "only hope".`,
+      },
+      {
+        ask: `(Clozapine continues, she deteriorates to ICU with cardiomyopathy, and her mother accuses you of negligence.) Describe (list and explain) your response to the mother's accusation.`,
+        marks: 5, skeleton: `Before · during · after the meeting`,
+        groups: [{ h: 'Response', lines: [
+          `Before — establish the facts (clinical/ICU course, prognosis); debrief the team; inform your clinical director; contact your medical defence organisation.`,
+          `During — offer a proper meeting (support person, private, duties handed over); listen, validate, apologise where appropriate (not an admission of liability); factual psychoeducation; assure a file review / clinical-incident audit; offer the formal complaint pathway.`,
+          `After — debrief and seek support; reflect across all dimensions — patient, mother, self, service, profession (the CanMEDS roles).`,
+        ]}],
+        thinFact: `Describe/explain = a bare list scores zero; structure before/during/after, each with its why. An apology is not an admission of liability.`,
+      },
+    ],
+  },
+  {
+    id: 'bill', name: 'Bill',
+    blurb: '71 · widower, lives alone · 3-month depression · "better off dead" · restricting food',
+    stem: `Bill, 71, is a widower who lives alone. He has a three-month depression with somatic preoccupation, says he would be "better off dead", and is restricting his food intake. He has recently been started on an SSRI.`,
+    subQs: [
+      {
+        ask: `List the important factors in assessing Bill's risk of harm to himself.`,
+        marks: 6, skeleton: `Static · dynamic/clinical · physical · treatment · protective`,
+        groups: [{ h: 'Risk factors', lines: [
+          `Static — age over 65, male, widower (bereavement / complex grief), lives alone (isolation).`,
+          `Dynamic/clinical — active suicidal ideation ("better off dead") with intent/plan/means; hopelessness, nihilistic and guilt cognitions; severe food/fluid restriction; agitation/insomnia.`,
+          `Physical — chronic or perceived physical illness; the burden-on-children belief.`,
+          `Treatment — recent SSRI commencement (early activation window); poor response so far.`,
+          `Protective (and their absence) — connectedness, supportive children, help-seeking, future orientation.`,
+        ]}],
+        thinFact: `Name suicidal ideation explicitly; frame as static / dynamic / historical / clinical / treatment + protective.`,
+      },
+      {
+        ask: `List the clinical factors important in determining whether inpatient treatment is required.`,
+        marks: 5, skeleton: `Safety · physical · treatment · support`,
+        groups: [{ h: 'Factors', lines: [
+          `Poor food/fluid intake — because dehydration/malnutrition is a medical emergency.`,
+          `Need for regular vital-sign monitoring; active suicidality (community safety can't be assured); poor adherence; inadequate home support / lives alone.`,
+          `Need for review more than once daily; psychotic symptoms — because psychotic depression raises risk and may need ECT.`,
+        ]}],
+        thinFact: `Add a one-line because to each even on a "list" question.`,
+      },
+      {
+        ask: `Discuss (list and debate) the possible strategies for pharmacological management of Bill's illness.`,
+        marks: 10, skeleton: `Antidepressants · antipsychotics · benzos · PHYSICAL illness · decision`,
+        groups: [{ h: 'Debate (option / pro / con)', lines: [
+          `Optimise the SSRI first (sertraline 50mg is sub-therapeutic → 100mg+): pro — a true adequate trial, low anticholinergic burden; con — hyponatraemia in the elderly (monitor sodium).`,
+          `Switch to an SNRI if no response: pro — broader profile; con — venlafaxine SPECIFICALLY raises BP (not a class effect).`,
+          `Mirtazapine: pro — aids sleep and appetite (directly relevant); con — sedation, weight, hyponatraemia.`,
+          `Antipsychotic if psychotic features — alongside an adequately dosed antidepressant, or ECT.`,
+          `Physical illness (the missed domain) — aperients for constipation, nutritional supplements / thiamine / electrolytes (refeeding awareness), antiemetics. Because the stem says "illness", not "mental illness".`,
+        ]}],
+        thinFact: `Debate = pros AND cons + a decision; "illness" is not "mental illness" — treat the constipation and nutrition too.`,
+      },
+      {
+        ask: `Describe (list and explain) the instructions you would give nursing staff in their assessment of Bill (now admitted).`,
+        marks: 10, skeleton: `Observation level FIRST · physical · mental-state · functional · risk`,
+        groups: [{ h: 'Instructions', lines: [
+          `State the observation level FIRST — at least 15-minutely visual observations (escalate to 1:1) — because he is high suicide-risk, newly admitted; it is the core admission instruction.`,
+          `Physical — regular vitals; food + fluid chart; urine / bowel chart.`,
+          `Mental-state — daily mood/symptom review; screen psychotic depression (Cotard) and hypoactive catatonia (→ ECT); daily 4AT for delirium.`,
+          `Functional — falls, mobility, sleep (early-morning waking), engagement.`,
+          `Risk — ask daily about ideation/intent/plan; escalate observation if risk rises.`,
+        ]}],
+        thinFact: `State the observation level FIRST — it is the single biggest miss on admission.`,
+      },
+    ],
+  },
+  {
+    id: 'hilton', name: 'Mrs Hilton',
+    blurb: '69 · early dementia · husband wants to care for her at home',
+    stem: `Mrs Hilton, 69, has early dementia. Her husband wants to care for her at home. She was a teacher, her alcohol intake has increased, and she has been leaving the stove on.`,
+    subQs: [
+      {
+        ask: `Describe (list and explain) what information you can give Mr Hilton about managing dementia at home.`,
+        marks: 10, skeleton: `Psychoed · MEDICATION · cognitive therapies · structure · behaviour · physical · safety · CARER · supports · legal`,
+        groups: [{ h: 'What — how — why', lines: [
+          `Psychoeducation on the illness, trajectory and BPSD — so he separates illness from intent ("not on purpose").`,
+          `Medication (a core miss) — cholinesterase inhibitors (donepezil etc.) in mild–moderate, memantine in moderate–severe; baseline pulse/ECG before a ChEI.`,
+          `Cognitive therapies (the other miss) — cognitive stimulation therapy, reminiscence (first-line non-drug).`,
+          `Structure & person-centred activity (she was a teacher); manage behaviours with an ABC diary.`,
+          `Optimise physical health (pain, constipation, sensory aids); address the increased alcohol.`,
+          `Home safety + driving — OT home assessment; no driving in moderate+ dementia.`,
+          `Carer self-care — respite, screen for carer depression. Because burnout is the main reason home care fails.`,
+          `Named supports — Dementia Australia, My Aged Care / ACAT, Carer Gateway. Legal — advance care directive, EPOA/guardianship while she has capacity.`,
+        ]}],
+        thinFact: `Explain question = what + HOW + why; name the medications, the therapies, and the actual agencies.`,
+      },
+      {
+        ask: `Outline (list and justify) the non-pharmacological strategies you would suggest for periods of agitation.`,
+        marks: 8, skeleton: `Framing · PROACTIVE · reactive · post-incident`,
+        groups: [{ h: 'Strategies', lines: [
+          `Framing — behaviours serve several functions (unmet need, pain, control, avoidance, self-stimulation); an ABC analysis finds the driver. Avoid "almost always an unmet need" (over-absolute).`,
+          `Proactive (lead with this) — optimise physical health, the environment (calm, low-stimulus, routine) and engagement; ABC monitoring.`,
+          `Reactive — recognise early warning signs; de-escalate (calm, short sentences, validate the emotion, don't argue, safe quiet space); maintain safety.`,
+          `Post-incident — revisit the ABC to prevent recurrence.`,
+        ]}],
+        thinFact: `Lead with PROACTIVE (prevention is the focus); avoid absolute statements like "almost always".`,
+      },
+    ],
+  },
+  {
+    id: 'toby', name: 'Toby',
+    blurb: '28 · new to area · ED Friday night requesting diazepam for "nerves"',
+    stem: `Toby, 28, is new to the area and presents to the emergency department on a Friday night requesting diazepam for his "nerves".`,
+    subQs: [
+      {
+        ask: `Outline (list and justify) the key history you would expect the registrar to have obtained.`,
+        marks: 14, skeleton: `Frame balanced · benzo · SafeScript · ALL substances · why-ED · psych/MSE · treatment hx · risk (broad) · psychosocial · collateral`,
+        groups: [{ h: 'History', lines: [
+          `Frame it balanced — misuse/dependence vs genuine anxiety vs both vs diversion — because the history must test each, not confirm one.`,
+          `The benzodiazepine — prescriber, indication, dose, pattern, sources, tolerance/dependence/withdrawal (incl. seizures).`,
+          `SafeScript / prescription-monitoring check — mandated; detects doctor-shopping.`,
+          `FULL substance + alcohol history (the key expansion) — interactions (benzos + opioids/alcohol → respiratory depression).`,
+          `Why ED, why now; psychiatric history + MSE broad (anxiety, depression, PTSD, OCD, psychosis, personality) — don't narrow to anxiety.`,
+          `Treatment history incl. prior D&A service contact and attempts to cut down.`,
+          `Risk — the full domain, not just suicide: to self, to others, forensic, substance-harm, diversion (selling).`,
+          `Psychosocial (housing / discharge address, supports); collateral with consent (NOK, GP).`,
+        ]}],
+        thinFact: `For a 14-marker, breadth wins; screen ALL substances; risk is far broader than suicide.`,
+      },
+      {
+        ask: `(Two weeks later Toby did not attend his follow-up AND has lodged a complaint.) Describe (list and explain) what you would discuss with the registrar about managing this further.`,
+        marks: 10, skeleton: `The missed appointment · the complaint · across both`,
+        groups: [{ h: 'Two domains', lines: [
+          `The missed appointment (the dropped half) — review the file/risk/crisis plan first; arrange contact (ideally not the complained-about registrar) to check safety/engagement; escalate to a welfare check if uncontactable; consult D&A and document.`,
+          `The complaint — reassure the registrar he should not respond personally (supervisor/consultant/director + medical defence org); clarify the complaint and what is wanted; sincere apology where appropriate; escalate and keep the complainant informed.`,
+          `Across both — support the registrar (peer support, insurer); frame as reflection / quality improvement.`,
+        ]}],
+        thinFact: `Read the WHOLE vignette — two events (non-attendance AND complaint); be concise; don't claim "against hospital policy".`,
+      },
+    ],
+  },
+  {
+    id: 'brooke', name: 'Brooke',
+    blurb: '22 · non-toxic paracetamol OD · childhood sexual abuse · family pressure · cutting/SI',
+    stem: `Brooke, 22, presents after a non-toxic paracetamol overdose. She discloses childhood sexual abuse by her grandfather, is under current family pressure, and has a history of cutting and suicidal ideation.`,
+    subQs: [
+      {
+        ask: `Outline (list and justify) the goals of immediate treatment.`,
+        marks: 6, skeleton: `Safety · DISPOSITION · distress · underlying disorder · family`,
+        groups: [{ h: 'Goals', lines: [
+          `Ensure immediate safety — assess/manage suicide and physical risk, set an observation level, remove means, confirm the paracetamol level / medical clearance.`,
+          `Decide and JUSTIFY the disposition (the missing piece) — admit (acute escalation, heavy psychosocial stressors, limited support, first presentation) OR discharge with support (non-toxic, no ongoing intent, supports, CATT follow-up, safety plan).`,
+          `Acute distress management — validation (especially given the family), distress tolerance, judicious short-term medication only if needed.`,
+          `Begin to address the underlying disorder (depression, PTSD, substance, emerging borderline pattern); engage the family appropriately, with consent.`,
+        ]}],
+        thinFact: `State and JUSTIFY the disposition — an ambiguous "admit-or-not?" answer loses marks.`,
+      },
+      {
+        ask: `Describe (list and explain) the disadvantages of continuing inpatient treatment.`,
+        marks: 4, skeleton: `Medicalisation · reinforcement · iatrogenic · stigma`,
+        groups: [{ h: 'Disadvantages', lines: [
+          `Medicalises an understandable reaction to an overwhelming stressor.`,
+          `Reinforces a maladaptive cycle (stressor → self-injury → hospital) instead of building distress tolerance.`,
+          `Iatrogenic ward harms — exposure to very unwell patients, reliance on PRN over psychological work; stigma and loss of income/job.`,
+          `(Higher marks) staff splitting, fostering dependence, therapeutic nihilism.`,
+        ]}],
+        thinFact: `For an emerging-BPD presentation, admission can reward the behaviour and foster dependence.`,
+      },
+      {
+        ask: `Discuss (list and debate) the pertinent ethical dilemmas from the counsellor's call (proposing Recovered Memory Therapy).`,
+        marks: 10, skeleton: `Consent · beneficence vs non-maleficence · diagnosis/evidence · duty vs alliance · resolution`,
+        groups: [{ h: 'Dilemmas', lines: [
+          `Consent / confidentiality — I need Brooke's consent to share even between clinicians; autonomy governs disclosure.`,
+          `Beneficence vs non-maleficence (the core) — RMT is not evidence-based and risks iatrogenic false memories, family rupture and legal harm; and it is inadvisable WHATEVER her diagnosis, because she is currently unstable and exploring further trauma risks decompensation.`,
+          `Diagnosis / evidence — may fit emerging BPD (DBT/MBT/TFP), but this doesn't exclude PTSD, and RMT isn't evidence-based for that either.`,
+          `Professional duty + collegiality vs her therapeutic alliance with a counsellor she chose.`,
+          `Resolution — discuss with Brooke first, then the counsellor; escalate — clinical director, medico-legal/insurer, peer group, and consider an AHPRA notification / duty to report.`,
+        ]}],
+        thinFact: `Name the principles (consent, autonomy, beneficence, non-maleficence, safety); RMT is contraindicated regardless of diagnosis.`,
       },
     ],
   },
 ];
 
+// Per-prisoner sigil: a coloured disc + emoji glyph (Adil keeps his bespoke barred-heart).
+const SIGILS = {
+  adil:      { beam: 0xc83040 },
+  madelaine: { glyph: '🗣️', bg: '#241640', ring: '#9a6aff', beam: 0x9a6aff },
+  bill:      { glyph: '🕯️', bg: '#16222e', ring: '#6a9ad0', beam: 0x6a9ad0 },
+  hilton:    { glyph: '🕰️', bg: '#2e2414', ring: '#d0a860', beam: 0xd0a860 },
+  toby:      { glyph: '💊', bg: '#2e2008', ring: '#ffc040', beam: 0xffc040 },
+  brooke:    { glyph: '💔', bg: '#2e0a14', ring: '#ff4060', beam: 0xff4060 },
+};
+function makeAdilSigil() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const x = c.getContext('2d'); x.clearRect(0, 0, 256, 256);
+  const cx = 128, cy = 124, s = 72;
+  x.fillStyle = '#c0303a';
+  x.beginPath();
+  x.moveTo(cx, cy + s * 0.62);
+  x.bezierCurveTo(cx - s, cy - s * 0.2, cx - s * 0.5, cy - s * 0.92, cx, cy - s * 0.34);
+  x.bezierCurveTo(cx + s * 0.5, cy - s * 0.92, cx + s, cy - s * 0.2, cx, cy + s * 0.62);
+  x.fill();
+  x.strokeStyle = '#15110c'; x.lineWidth = 11; x.lineCap = 'round';
+  for (const bx of [cx - 45, cx - 15, cx + 15, cx + 45]) { x.beginPath(); x.moveTo(bx, cy - 80); x.lineTo(bx, cy + 74); x.stroke(); }
+  x.strokeStyle = '#dadce4'; x.lineWidth = 6; x.beginPath(); x.moveTo(cx - 90, cy - 90); x.lineTo(cx + 72, cy + 60); x.stroke();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function makeSigil(spec) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256; const x = c.getContext('2d');
+  x.clearRect(0, 0, 256, 256);
+  x.fillStyle = spec.bg; x.beginPath(); x.arc(128, 128, 104, 0, Math.PI * 2); x.fill();
+  x.strokeStyle = spec.ring; x.lineWidth = 12; x.beginPath(); x.arc(128, 128, 104, 0, Math.PI * 2); x.stroke();
+  x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = '128px "Apple Color Emoji", system-ui, sans-serif';
+  x.fillText(spec.glyph, 128, 140);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function getSigilTex(pid) { return pid === 'adil' ? makeAdilSigil() : makeSigil(SIGILS[pid]); }
+
 let dungeonNearConsole = false;
 let dungeonOverlayOpen = false;
 let dungeonPrisoner = null;
 let dungeonSubIdx = 0;
+let dungeonConsoles = [];
+let cellSpawns = {};
+let dungeonReturn = null;
+function enterDungeon(pid) {
+  const sp = cellSpawns[pid];
+  dungeonReturn = { world: currentWorld, pos: camera.position.clone(), yaw: controls.getObject().rotation.y };
+  fadeAndTeleport('dungeon', sp ? sp.pos.clone() : undefined);
+  if (sp) setTimeout(() => { try { controls.getObject().rotation.set(0, sp.yaw, 0); } catch (e) {} }, 440);
+}
+function exitDungeon() {
+  const r = dungeonReturn; dungeonReturn = null;
+  if (!r) { fadeAndTeleport('hub'); return; }
+  fadeAndTeleport(r.world, r.pos.clone());
+  setTimeout(() => { try { controls.getObject().rotation.set(0, r.yaw, 0); } catch (e) {} }, 440);
+}
 
 function dungeonOpen(pid) {
   const p = PRISONERS.find(x => x.id === pid); if (!p) return;
@@ -11756,17 +12017,17 @@ function dungeonRender(revealed) {
   const p = dungeonPrisoner; const q = p.subQs[dungeonSubIdx];
   const multi = p.subQs.length > 1;
   let html =
-    '<p style="margin:0 0 2px; color:#b08050; font-size:12px; letter-spacing:2px;">CASE FILE — PRISONER</p>' +
+    '<p style="margin:0 0 2px; color:#b08050; font-size:12px; letter-spacing:2px;">CASE FILE — PRISONER ' + (PRISONERS.indexOf(p) + 1) + ' of ' + PRISONERS.length + '</p>' +
     '<h2 style="margin:0 0 6px; color:#e8c080;">' + p.name + ' <span style="color:#9a8a70; font-size:14px; font-style:italic;">— ' + p.blurb + '</span></h2>' +
     '<p style="margin:0 0 14px; padding:11px 14px; background:#1a1410; border-left:3px solid #6a4a28; border-radius:4px; color:#d8c8b0; font-style:italic;">' + p.stem + '</p>' +
-    '<p style="margin:0 0 6px; color:#f0d8a8;"><b>Q' + (dungeonSubIdx + 1) + '.</b> ' + q.ask + ' <span style="color:#b08050;">(' + q.marks + ' marks)</span></p>' +
+    '<p style="margin:0 0 6px; color:#f0d8a8;"><b>Q' + (dungeonSubIdx + 1) + (multi ? '/' + p.subQs.length : '') + '.</b> ' + q.ask + ' <span style="color:#b08050;">(' + q.marks + ' marks)</span></p>' +
     '<p style="margin:0 0 10px; color:#9a8a70; font-size:13px; font-style:italic;">List + justify = WHAT + WHY. A list with no justification scores zero.</p>';
   if (!revealed) {
     html +=
       '<textarea id="dungeonAnswer" placeholder="Type your answer — domains, with a because for each…" style="width:100%; box-sizing:border-box; min-height:150px; padding:10px 12px; background:#0c0906; color:#e8dcc8; border:1px solid #5a4428; border-radius:6px; font:15px Georgia,serif; resize:vertical;"></textarea>' +
       '<div style="margin-top:10px;">' +
       '<button id="dungeonReveal" style="padding:9px 16px; margin:0 8px 8px 0; background:#a8722e; color:#100a04; border:none; border-radius:6px; font:bold 14px Georgia,serif; cursor:pointer;">Reveal model answer</button>' +
-      '<button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>' +
+      '<button class="dungeonLeaveBtn" style="padding:9px 16px; margin:0 8px 8px 0; background:#3a1410; color:#f0a890; border:1px solid #6a2a20; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">← Leave the Dungeon</button><button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>' +
       '</div>';
   } else {
     const taEl = document.getElementById('dungeonAnswer');
@@ -11781,7 +12042,7 @@ function dungeonRender(revealed) {
     html += '<div>';
     if (multi && dungeonSubIdx < p.subQs.length - 1) html += '<button id="dungeonNext" style="padding:9px 16px; margin:0 8px 8px 0; background:#a8722e; color:#100a04; border:none; border-radius:6px; font:bold 14px Georgia,serif; cursor:pointer;">Next sub-question →</button>';
     html += '<button id="dungeonRetry" style="padding:9px 16px; margin:0 8px 8px 0; background:#1a1410; color:#e8c080; border:1px solid #5a4428; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">↻ Try again</button>';
-    html += '<button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>';
+    html += '<button class="dungeonLeaveBtn" style="padding:9px 16px; margin:0 8px 8px 0; background:#3a1410; color:#f0a890; border:1px solid #6a2a20; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">← Leave the Dungeon</button><button class="dungeonCloseBtn" style="padding:9px 16px; margin-bottom:8px; background:#1a1410; color:#b8a890; border:1px solid #4a3a28; border-radius:6px; font:14px Georgia,serif; cursor:pointer;">Close</button>';
     html += '</div>';
   }
   ov.querySelector('.dbody').innerHTML = html;
@@ -11789,6 +12050,7 @@ function dungeonRender(revealed) {
   const nxt = ov.querySelector('#dungeonNext'); if (nxt) nxt.addEventListener('click', () => { dungeonSubIdx++; dungeonRender(false); });
   const rty = ov.querySelector('#dungeonRetry'); if (rty) rty.addEventListener('click', () => dungeonRender(false));
   ov.querySelectorAll('.dungeonCloseBtn').forEach(b => b.addEventListener('click', dungeonClose));
+  ov.querySelectorAll('.dungeonLeaveBtn').forEach(b => b.addEventListener('click', () => { dungeonClose(); exitDungeon(); }));
   const ta = ov.querySelector('#dungeonAnswer'); if (ta) setTimeout(() => { try { ta.focus(); } catch (e) {} }, 30);
 }
 function dungeonClose() { const ov = document.getElementById('dungeonOverlay'); if (ov) ov.style.display = 'none'; dungeonOverlayOpen = false; }
@@ -11798,29 +12060,16 @@ function dungeonTryActivate() {
   if (dungeonNearConsole) dungeonOpen(dungeonNearConsole);
 }
 
-function makeAdilSigil() {
-  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
-  const x = c.getContext('2d'); x.clearRect(0, 0, 256, 256);
-  const cx = 128, cy = 124, s = 72;
-  x.fillStyle = '#c0303a';
-  x.beginPath();
-  x.moveTo(cx, cy + s * 0.62);
-  x.bezierCurveTo(cx - s, cy - s * 0.2, cx - s * 0.5, cy - s * 0.92, cx, cy - s * 0.34);
-  x.bezierCurveTo(cx + s * 0.5, cy - s * 0.92, cx + s, cy - s * 0.2, cx, cy + s * 0.62);
-  x.fill();
-  x.strokeStyle = '#15110c'; x.lineWidth = 11; x.lineCap = 'round';
-  for (const bx of [cx - 45, cx - 15, cx + 15, cx + 45]) { x.beginPath(); x.moveTo(bx, cy - 80); x.lineTo(bx, cy + 74); x.stroke(); }
-  x.strokeStyle = '#dadce4'; x.lineWidth = 6; x.beginPath(); x.moveTo(cx - 90, cy - 90); x.lineTo(cx + 72, cy + 60); x.stroke();
-  x.fillStyle = '#9aa0b0'; x.save(); x.translate(cx - 90, cy - 90); x.rotate(Math.PI / 4); x.fillRect(-11, -6, 22, 12); x.restore();
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
-}
-
 function buildDungeon() {
   const root = new THREE.Group();
   root.position.set(0, DUNGEON_Y, 0);
   scene.add(root);
   DUNGEON_ROOT = root;
-  const W = 4, D = 12;
+  const W = 4;
+  const z0 = 6, dz = 1.8;
+  const layout = PRISONERS.map((p, i) => ({ id: p.id, wall: (i % 2 === 0 ? -1 : 1), z: z0 - i * dz }));
+  const zLast = layout.length ? layout[layout.length - 1].z : 0;
+  const D = Math.max(12, Math.abs(zLast) + 4);
   const stone = new THREE.MeshStandardMaterial({ color: 0x5a5048, roughness: 0.95 });
   const floor = new THREE.Mesh(new THREE.BoxGeometry(W * 2, 0.3, D * 2), new THREE.MeshStandardMaterial({ color: 0x3c362e, roughness: 0.96 }));
   floor.position.y = -0.15; root.add(floor);
@@ -11836,32 +12085,35 @@ function buildDungeon() {
     const fl = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 6), new THREE.MeshBasicMaterial({ color: 0xffae50 }));
     fl.position.set(tx, 2.95, tz); root.add(fl);
     const pl = new THREE.PointLight(0xffc070, 2.4, 22); pl.position.set(tx, 2.95, tz); root.add(pl);
-    tickers.push(t => { pl.intensity = 1.0 + Math.sin(t * 0.012 + tx) * 0.18 + Math.sin(t * 0.03 + tz) * 0.1; fl.scale.setScalar(0.9 + Math.sin(t * 0.02 + tx) * 0.12); });
+    tickers.push(t => { pl.intensity = 2.2 + Math.sin(t * 0.012 + tx) * 0.3 + Math.sin(t * 0.03 + tz) * 0.15; fl.scale.setScalar(0.9 + Math.sin(t * 0.02 + tx) * 0.12); });
   }
-  torch(-W + 0.4, 6); torch(W - 0.4, 0); torch(-W + 0.4, -6); torch(W - 0.4, 6); torch(W - 0.4, -6);
-  // Adil's cell on the west wall — barred niche + slumped figure + sigil
-  const cellZ = -2;
-  const barMat = new THREE.MeshStandardMaterial({ color: 0x3a3a40, roughness: 0.6, metalness: 0.6 });
-  for (let i = 0; i < 7; i++) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 3.2, 8), barMat); bar.position.set(-W + 0.45, 1.6, cellZ - 1.5 + i * 0.5); root.add(bar); }
-  for (const by of [0.45, 2.85]) { const cb = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 3.2), barMat); cb.position.set(-W + 0.45, by, cellZ); root.add(cb); }
-  const figMat = new THREE.MeshStandardMaterial({ color: 0x4a4038, roughness: 0.95 });
-  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.26, 0.5, 4, 8), figMat); torso.position.set(-W + 0.2, 0.6, cellZ + 0.4); torso.rotation.z = 0.6; root.add(torso);
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), figMat); head.position.set(-W + 0.55, 0.85, cellZ + 0.4); root.add(head);
-  const sigTex = makeAdilSigil();
-  const plaque = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), new THREE.MeshBasicMaterial({ map: sigTex, transparent: true }));
-  plaque.position.set(-W + 0.32, 3.4, cellZ); plaque.rotation.y = Math.PI / 2; root.add(plaque);
-  // the confession terminal — interaction point, facing east toward the player
-  const cg = new THREE.Group(); cg.position.set(-2.0, 0, cellZ); cg.rotation.y = Math.PI / 2; root.add(cg);
-  const lectern = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.1, 0.7), new THREE.MeshStandardMaterial({ color: 0x241c14, roughness: 0.9 })); lectern.position.y = 0.55; cg.add(lectern);
-  const slantTop = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.5, 0.06), new THREE.MeshBasicMaterial({ color: 0x0e2a18 })); slantTop.position.set(0, 1.16, 0.18); slantTop.rotation.x = -0.6; cg.add(slantTop);
-  const cglow = new THREE.PointLight(0x60ff90, 0.5, 5); cglow.position.set(0, 1.3, 0.3); cg.add(cglow);
-  tickers.push(t => { cglow.intensity = (dungeonOverlayOpen ? 0.9 : 0.45) + Math.sin(t * 0.02) * 0.1; });
-  // placard near spawn
+  { const step = Math.max(5, (2 * D) / 8); let ti = 0; for (let tz = D - 3; tz > -D + 1; tz -= step) { torch((ti % 2 ? 1 : -1) * (W - 0.4), tz); ti++; } }
+
+  dungeonConsoles = []; cellSpawns = {};
+  function buildCell(p, wall, cz) {
+    const barMat = new THREE.MeshStandardMaterial({ color: 0x44444c, roughness: 0.55, metalness: 0.6 });
+    const bx = wall * (W - 0.45);
+    for (let i = 0; i < 7; i++) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 3.2, 8), barMat); bar.position.set(bx, 1.6, cz - 1.5 + i * 0.5); root.add(bar); }
+    for (const by of [0.45, 2.85]) { const cb = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 3.2), barMat); cb.position.set(bx, by, cz); root.add(cb); }
+    const figMat = new THREE.MeshStandardMaterial({ color: 0x6a5e52, roughness: 0.95 });
+    const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.26, 0.5, 4, 8), figMat); torso.position.set(wall * (W - 0.2), 0.6, cz + 0.4); torso.rotation.z = wall * 0.6; root.add(torso);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), figMat); head.position.set(wall * (W - 0.55), 0.85, cz + 0.4); root.add(head);
+    const plaque = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.9), new THREE.MeshBasicMaterial({ map: getSigilTex(p.id), transparent: true }));
+    plaque.position.set(wall * (W - 0.3), 3.3, cz); plaque.rotation.y = wall < 0 ? Math.PI / 2 : -Math.PI / 2; root.add(plaque);
+    const cg = new THREE.Group(); cg.position.set(wall * 2.0, 0, cz); cg.rotation.y = wall < 0 ? Math.PI / 2 : -Math.PI / 2; root.add(cg);
+    const lectern = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.1, 0.7), new THREE.MeshStandardMaterial({ color: 0x2c2418, roughness: 0.9 })); lectern.position.y = 0.55; cg.add(lectern);
+    const screen = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.5, 0.06), new THREE.MeshBasicMaterial({ color: SIGILS[p.id].beam })); screen.position.set(0, 1.16, 0.18); screen.rotation.x = -0.6; cg.add(screen);
+    dungeonConsoles.push({ pid: p.id, x: wall * 2.0, z: cz });
+    cellSpawns[p.id] = { pos: new THREE.Vector3(0, DUNGEON_Y + 1.7, cz), yaw: wall < 0 ? Math.PI / 2 : -Math.PI / 2 };
+  }
+  for (const L of layout) { const p = PRISONERS.find(x => x.id === L.id); if (p) buildCell(p, L.wall, L.z); }
+
   const lc = document.createElement('canvas'); lc.width = 512; lc.height = 256;
-  { const x = lc.getContext('2d'); x.fillStyle = '#140d07'; x.fillRect(0, 0, 512, 256); x.strokeStyle = '#6a4a28'; x.lineWidth = 5; x.strokeRect(6, 6, 500, 244); x.textAlign = 'center'; x.fillStyle = '#e8c080'; x.font = 'bold 30px Georgia, serif'; x.fillText('THE CELLS', 256, 46); x.fillStyle = '#d8c8b0'; x.font = '18px Georgia, serif'; x.fillText('Each prisoner is a real exam case.', 256, 90); x.fillText('Activate the terminal (E or the button).', 256, 120); x.fillText('Type your answer, then reveal the model.', 256, 150); x.fillStyle = '#9a8a70'; x.font = 'italic 17px Georgia, serif'; x.fillText('Self-mark. The same sigil marks every', 256, 194); x.fillText('island this case touches.', 256, 218); }
+  { const x = lc.getContext('2d'); x.fillStyle = '#140d07'; x.fillRect(0, 0, 512, 256); x.strokeStyle = '#6a4a28'; x.lineWidth = 5; x.strokeRect(6, 6, 500, 244); x.textAlign = 'center'; x.fillStyle = '#e8c080'; x.font = 'bold 30px Georgia, serif'; x.fillText('THE CELLS', 256, 46); x.fillStyle = '#d8c8b0'; x.font = '18px Georgia, serif'; x.fillText('Each prisoner is a real exam case.', 256, 90); x.fillText('Find a cell, activate the terminal (E),', 256, 120); x.fillText('type your answer, then reveal the model.', 256, 150); x.fillStyle = '#9a8a70'; x.font = 'italic 17px Georgia, serif'; x.fillText('The same sigil marks every island', 256, 194); x.fillText('that case touches.', 256, 218); }
   const ltex = new THREE.CanvasTexture(lc); ltex.colorSpace = THREE.SRGBColorSpace;
-  const placard = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.3), new THREE.MeshBasicMaterial({ map: ltex })); placard.position.set(W - 0.12, 2.2, 6); placard.rotation.y = -Math.PI / 2; root.add(placard);
-  addReturnPortal({ x: 0, baseY: DUNGEON_Y, z: 10.4, rotY: 0, label: 'Leave the Dungeon' });
+  const placard = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.3), new THREE.MeshBasicMaterial({ map: ltex })); placard.position.set(W - 0.12, 2.2, D - 3.5); placard.rotation.y = -Math.PI / 2; root.add(placard);
+  addReturnPortal({ x: 0, baseY: DUNGEON_Y, z: D - 1.4, rotY: 0, label: 'Leave the Dungeon' });
+  portals[portals.length - 1].fire = exitDungeon;
   if (!document.getElementById('dungeonOverlay')) {
     const ov = document.createElement('div'); ov.id = 'dungeonOverlay';
     ov.style.cssText = 'display:none; position:fixed; inset:0; z-index:60; background:rgba(6,4,2,0.9); align-items:center; justify-content:center; font-family:Georgia,serif;';
@@ -11875,29 +12127,48 @@ function buildDungeon() {
 }
 __activeTickerWorld = 'dungeon'; buildDungeon(); __activeTickerWorld = '_global';
 
-// Adil's sigil portals — one per island his case touches (the cross-association kicker).
-function addPrisonerSigil(worldName, sx, sy, sz, pid) {
+// Each prisoner's sigil planted ~3m from a case-relevant station on every island its case touches.
+function addPrisonerSigil(pid, sx, sy, sz) {
+  const col = SIGILS[pid].beam;
   const g = new THREE.Group(); g.position.set(sx, sy, sz); scene.add(g);
-  const tex = makeAdilSigil();
+  const tex = getSigilTex(pid);
   const sigMat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthWrite: false });
   const sigA = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), sigMat); g.add(sigA);
-  const sigB = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), sigMat); sigB.rotation.y = Math.PI / 2; g.add(sigB); // crossed → face-on from any angle
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.9, 0.07, 8, 32), new THREE.MeshBasicMaterial({ color: 0xff3048 })); g.add(ring);
-  // NO real PointLight — the beacon is self-lit basic material. Always-on point lights here
-  // inflated every world's light count and darkened light-heavy islands (e.g. XIII).
-  const beamMat = new THREE.MeshBasicMaterial({ color: 0xff2840, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false });
-  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.6, 30, 12, 1, true), beamMat); beam.position.y = 13.3; g.add(beam); // floor → 30m, a findable landmark
-  const orb = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshBasicMaterial({ color: 0xff3048 })); orb.position.y = 28; g.add(orb);
+  const sigB = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), sigMat); sigB.rotation.y = Math.PI / 2; g.add(sigB);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.9, 0.07, 8, 32), new THREE.MeshBasicMaterial({ color: col })); g.add(ring);
+  const beamMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false });
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.6, 30, 12, 1, true), beamMat); beam.position.y = 13.3; g.add(beam);
+  const orb = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshBasicMaterial({ color: col })); orb.position.y = 28; g.add(orb);
   tickers.push(t => { g.rotation.y = t * 0.0005; beamMat.opacity = 0.22 + Math.sin(t * 0.003) * 0.08; });
-  portals.push({ pos: new THREE.Vector3(sx, sy, sz), radius: 1.6, fire: () => fadeAndTeleport('dungeon') });
+  portals.push({ pos: new THREE.Vector3(sx, sy, sz), radius: 1.6, fire: () => enterDungeon(pid) });
 }
-// Planted ~3m from the case-relevant station on each island (world coords x, y, z), not at spawn.
-__activeTickerWorld = 'fairground'; addPrisonerSigil('fairground', 16, 601.7, 23,  'adil'); // nr II Ferris Wheel (psychosis landmark)
-__activeTickerWorld = 'depression'; addPrisonerSigil('depression',  3, 808.7, -2,  'adil'); // nr IV The Pharmacy (mood vs substance)
-__activeTickerWorld = 'substance';  addPrisonerSigil('substance',   8, 1401.7, -9, 'adil'); // nr V The Suk Doctor (OST / withdrawal)
-__activeTickerWorld = 'cl';         addPrisonerSigil('cl',          0, 2601.7, -10, 'adil'); // central courtyard, nr VII Thorwald's Window (delirium)
-__activeTickerWorld = 'cultural';   addPrisonerSigil('cultural',    7, 2801.7, -20, 'adil'); // nr VII Coastal Boats (refugee MH)
-__activeTickerWorld = 'mha';        addPrisonerSigil('mha',        -6, 3401.7, 22,  'adil'); // nr II Capacity Assessment
+// Adil (real Aug-2024 case)
+__activeTickerWorld = 'fairground'; addPrisonerSigil('adil', 16, 601.7, 23);
+__activeTickerWorld = 'depression'; addPrisonerSigil('adil', 3, 808.7, -2);
+__activeTickerWorld = 'substance';  addPrisonerSigil('adil', 8, 1401.7, -9);
+__activeTickerWorld = 'cl';         addPrisonerSigil('adil', 0, 2601.7, -10);
+__activeTickerWorld = 'cultural';   addPrisonerSigil('adil', 7, 2801.7, -20);
+__activeTickerWorld = 'mha';        addPrisonerSigil('adil', -6, 3401.7, 22);
+// Madelaine — schizophrenia / clozapine / negligence complaint
+__activeTickerWorld = 'fairground'; addPrisonerSigil('madelaine', 3, 601.7, 0);
+__activeTickerWorld = 'treatments'; addPrisonerSigil('madelaine', 7, 3801.7, -4);
+__activeTickerWorld = 'governance'; addPrisonerSigil('madelaine', 7, 3201.7, -4);
+// Bill — elderly depression / suicide / ECT
+__activeTickerWorld = 'depression'; addPrisonerSigil('bill', 7, 812.8, -12);
+__activeTickerWorld = 'oldage';     addPrisonerSigil('bill', -5, 2001.7, 22);
+__activeTickerWorld = 'treatments'; addPrisonerSigil('bill', -7, 3801.7, -14);
+// Mrs Hilton — dementia / BPSD / cholinesterase / advance planning
+__activeTickerWorld = 'oldage';     addPrisonerSigil('hilton', -5, 2001.7, -27);
+__activeTickerWorld = 'treatments'; addPrisonerSigil('hilton', 5, 3801.7, -36);
+__activeTickerWorld = 'mha';        addPrisonerSigil('hilton', 5, 3401.7, -36);
+// Toby — benzo ED / substance / diversion / complaint
+__activeTickerWorld = 'substance';  addPrisonerSigil('toby', -6, 1401.7, -29);
+__activeTickerWorld = 'governance'; addPrisonerSigil('toby', 7, 3201.7, -22);
+__activeTickerWorld = 'forensic';   addPrisonerSigil('toby', 5, 3001.7, 14);
+// Brooke — emerging BPD / OD / RMT ethics / CSA reporting
+__activeTickerWorld = 'personality'; addPrisonerSigil('brooke', 6, 1601.7, -3);
+__activeTickerWorld = 'ethics';      addPrisonerSigil('brooke', 7, 3601.7, -22);
+__activeTickerWorld = 'forensic';    addPrisonerSigil('brooke', -5, 3001.7, -30);
 __activeTickerWorld = '_global';
 
 
@@ -94036,7 +94307,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v38 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v39 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
@@ -94139,10 +94410,17 @@ function animate() {
     if (btn) btn.style.display = (!IS_TOUCH && reflNearConsole && !reflOverlayOpen) ? 'block' : 'none';
   }
 
-  // Dungeon console proximity + the on-screen "Open the case file" button.
+  // Dungeon console proximity — pick the nearest cell terminal — + the on-screen button.
   {
-    dungeonNearConsole = ((currentWorld === 'dungeon') &&
-      (Math.hypot(camera.position.x - (-2.0), camera.position.z - (-2)) < 3.0)) ? 'adil' : false;
+    let near = false;
+    if (currentWorld === 'dungeon') {
+      let nd = 2.2;
+      for (const c of dungeonConsoles) {
+        const d = Math.hypot(camera.position.x - c.x, camera.position.z - c.z);
+        if (d < nd) { nd = d; near = c.pid; }
+      }
+    }
+    dungeonNearConsole = near;
     const btn = document.getElementById('dungeonActivateBtn');
     if (btn) btn.style.display = (!IS_TOUCH && dungeonNearConsole && !dungeonOverlayOpen) ? 'block' : 'none';
   }
