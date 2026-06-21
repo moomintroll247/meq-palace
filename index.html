@@ -11819,11 +11819,12 @@ const PRISONERS = [
         groups: [{ h: 'Debate (option / pro / con)', lines: [
           `Optimise the SSRI first (sertraline 50mg is sub-therapeutic → 100mg+): pro — a true adequate trial, low anticholinergic burden; con — hyponatraemia in the elderly (monitor sodium).`,
           `Switch to an SNRI if no response: pro — broader profile; con — venlafaxine SPECIFICALLY raises BP (not a class effect).`,
+          `Match the class to the SUBTYPE: atypical → MAOI; severe melancholic → SNRI; very severe / inpatient → TCA (all second-line after an adequate SSRI). "TCA/SNRI for atypical" is wrong — atypical is the MAOI niche. Bill reads melancholic.`,
           `Mirtazapine: pro — aids sleep and appetite (directly relevant); con — sedation, weight, hyponatraemia.`,
           `Antipsychotic if psychotic features — alongside an adequately dosed antidepressant, or ECT.`,
           `Physical illness (the missed domain) — aperients for constipation, nutritional supplements / thiamine / electrolytes (refeeding awareness), antiemetics. Because the stem says "illness", not "mental illness".`,
         ]}],
-        thinFact: `Debate = pros AND cons + a decision; "illness" is not "mental illness" — treat the constipation and nutrition too.`,
+        thinFact: `Debate = pros AND cons + a decision; "illness" is not "mental illness". Subtype→class: atypical→MAOI, melancholic→SNRI/TCA.`,
       },
       {
         ask: `Describe (list and explain) the instructions you would give nursing staff in their assessment of Bill (now admitted).`,
@@ -94307,7 +94308,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v39 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v40 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
