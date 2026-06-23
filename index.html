@@ -11739,7 +11739,7 @@ const PRISONERS = [
           `Metabolic + cardiac baseline (BMI, lipids, glucose, ECG/QTc), substances, MSE & risk — because any switch carries metabolic/cardiac risk and the request may be psychotically driven.`,
           `Capacity for this decision + Mental Health Act status; social supports, case manager, family (an angry mother is coming) — because if voluntary and capacitous she leads it.`,
         ]}],
-        thinFact: `A bare list scores zero — every point needs a because. Start with HER perspective; never assess a symptom in isolation.`,
+        thinFact: `A bare list scores zero — every point needs a because. And a GENERIC because ("to inform management") isn't a guaranteed mark; make it specific and mechanism-level. Start with HER perspective; never assess a symptom in isolation.`,
       },
       {
         ask: `Outline (list and justify) the key examination and investigation findings you would require to reassess Madelaine.`,
@@ -11760,8 +11760,9 @@ const PRISONERS = [
           `Pharmacological — an anticholinergic (e.g. benztropine) opposes nigrostriatal blockade; or switch to a lower-EPSE agent (aripiprazole / clozapine); or reduce the dose if mental state permits.`,
           `Functional — OT assessment of the impact on activities of daily living.`,
           `Psychological — CBT for the shame and negative self-image the symptoms generate.`,
+          `The domain-cap: dose-reduce / switch agent / add clozapine are ALL one domain (adjusting the antipsychotic) and cap at its marks — three correct points there still score ~2/3. Adding a psychological and a functional arm opens NEW mark pools.`,
         ]}],
-        thinFact: `"Treatment options" = biopsychosocial, not just pharmacology — that breadth is the smart move.`,
+        thinFact: `Each domain caps at its marks — 3 correct antipsychotic tweaks still = 2/3. Spread across bio-psycho-social to open new mark pools; depth in one domain is wasted ink.`,
       },
       {
         ask: `(She starts clozapine; reports one hot/cold episode; QTc has risen 428→492ms but troponin, CK and exam are normal.) Outline (list and justify) the approaches to management you would consider.`,
@@ -11770,9 +11771,10 @@ const PRISONERS = [
           `Assess first — repeat/serial ECG & QTc, serial troponin/CK/CRP/FBE, obs incl. temperature, consult cardiology + the clozapine service, MSE & risk. Because management = assessment then treatment.`,
           `First choice: cautious continuation at the current dose with intensified monitoring — because the findings don't mandate cessation and clozapine is best-evidence for treatment resistance; premature withdrawal risks relapse + cholinergic rebound.`,
           `Second: hold or reduce the dose if findings progress. Reserved: cease only for clear myocarditis or serious harm.`,
+          `"Approaches" is PLURAL — give several (continue-with-monitoring / reduce dose / admit), not one. Admission is AN option, not THE option, when there's no real abnormality yet. Don't over-anchor on the ICU outcome you can foresee from the next stem.`,
           `Throughout: shared decision-making (and the mother, with consent), red-flag psychoeducation, and maintain hope — never say "her only hope".`,
         ]}],
-        thinFact: `"Management" = assess then treat — don't jump to treatment; and never say "only hope".`,
+        thinFact: `"Management" = assess then treat; "approaches" is plural — give several options, don't anchor on one (or on the bad outcome you foresee). Never say "only hope".`,
       },
       {
         ask: `(Clozapine continues, she deteriorates to ICU with cardiomyopathy, and her mother accuses you of negligence.) Describe (list and explain) your response to the mother's accusation.`,
@@ -11781,8 +11783,9 @@ const PRISONERS = [
           `Before — establish the facts (clinical/ICU course, prognosis); debrief the team; inform your clinical director; contact your medical defence organisation.`,
           `During — offer a proper meeting (support person, private, duties handed over); listen, validate, apologise where appropriate (not an admission of liability); factual psychoeducation; assure a file review / clinical-incident audit; offer the formal complaint pathway.`,
           `After — debrief and seek support; reflect across all dimensions — patient, mother, self, service, profession (the CanMEDS roles).`,
+          `The domain-cap applies here too: 3-4 points on "dealing with the mother" saturates that domain — the remaining marks live in separate pools (you the clinician, the service, the profession/QI). Spread across mother · self · service · profession.`,
         ]}],
-        thinFact: `Describe/explain = a bare list scores zero; structure before/during/after, each with its why. An apology is not an admission of liability.`,
+        thinFact: `Describe/explain = a bare list scores zero; structure before/during/after, each with its why. An apology is not an admission of liability. Don't pile points on the mother — spread across self/service/profession (the domain-cap).`,
       },
     ],
   },
@@ -11800,8 +11803,9 @@ const PRISONERS = [
           `Physical — chronic or perceived physical illness; the burden-on-children belief.`,
           `Treatment — recent SSRI commencement (early activation window); poor response so far.`,
           `Protective (and their absence) — connectedness, supportive children, help-seeking, future orientation.`,
+          `Higher marks — psychotic features (nihilistic/guilt/somatic delusions = psychotic depression, markedly higher risk) and medication side-effects (early-SSRI agitation) as contributors.`,
         ]}],
-        thinFact: `Name suicidal ideation explicitly; frame as static / dynamic / historical / clinical / treatment + protective.`,
+        thinFact: `Name suicidal ideation explicitly; frame as static / dynamic / historical / clinical / treatment + protective. For more marks, add psychotic delusions + medication activation.`,
       },
       {
         ask: `List the clinical factors important in determining whether inpatient treatment is required.`,
@@ -11866,7 +11870,7 @@ const PRISONERS = [
         groups: [{ h: 'Strategies', lines: [
           `Framing — behaviours serve several functions (unmet need, pain, control, avoidance, self-stimulation); an ABC analysis finds the driver. Avoid "almost always an unmet need" (over-absolute).`,
           `Proactive (lead with this) — optimise physical health, the environment (calm, low-stimulus, routine) and engagement; ABC monitoring.`,
-          `Reactive — recognise early warning signs; de-escalate (calm, short sentences, validate the emotion, don't argue, safe quiet space); maintain safety.`,
+          `Reactive — recognise early warning signs; de-escalate (calm, short sentences, validate the emotion, don't argue, safe quiet space); maintain safety; behavioural intervention via reinforcement/extinction — reinforce adaptive behaviour, don't inadvertently reward the behaviour of concern.`,
           `Post-incident — revisit the ABC to prevent recurrence.`,
         ]}],
         thinFact: `Lead with PROACTIVE (prevention is the focus); avoid absolute statements like "almost always".`,
@@ -11928,9 +11932,11 @@ const PRISONERS = [
           `Medicalises an understandable reaction to an overwhelming stressor.`,
           `Reinforces a maladaptive cycle (stressor → self-injury → hospital) instead of building distress tolerance.`,
           `Iatrogenic ward harms — exposure to very unwell patients, reliance on PRN over psychological work; stigma and loss of income/job.`,
-          `(Higher marks) staff splitting, fostering dependence, therapeutic nihilism.`,
+          `Behavioural contagion — she may learn and model maladaptive coping (new self-harm methods) from other patients on the unit.`,
+          `Disrupts the protective scaffolding outside — work, finances and social supports (her receptionist job) — the very things that guard against relapse, and removes her autonomy.`,
+          `(Higher marks) staff splitting, fostering dependence and regression, therapeutic nihilism, and MALIGNANT ALIENATION — staff progressively withdraw from a patient seen as difficult; a recognised risk factor for inpatient suicide.`,
         ]}],
-        thinFact: `For an emerging-BPD presentation, admission can reward the behaviour and foster dependence.`,
+        thinFact: `Admission can reward the behaviour, foster dependence/regression, teach maladaptive coping from other patients, and breed staff splitting / malignant alienation — while disrupting the work/social supports that protect her.`,
       },
       {
         ask: `Discuss (list and debate) the pertinent ethical dilemmas from the counsellor's call (proposing Recovered Memory Therapy).`,
@@ -11941,8 +11947,9 @@ const PRISONERS = [
           `Diagnosis / evidence — may fit emerging BPD (DBT/MBT/TFP), but this doesn't exclude PTSD, and RMT isn't evidence-based for that either.`,
           `Professional duty + collegiality vs her therapeutic alliance with a counsellor she chose.`,
           `Resolution — discuss with Brooke first, then the counsellor; escalate — clinical director, medico-legal/insurer, peer group, and consider an AHPRA notification / duty to report.`,
+          `Don't disengage on "she's not my patient" — the stem is vague on her status and the counsellor has phoned YOU, so you're already in the scenario. Your duty of care to her, other patients and the profession is engaged the moment you hold this information. Answer the ethics, don't sidestep on jurisdiction.`,
         ]}],
-        thinFact: `Name the principles (consent, autonomy, beneficence, non-maleficence, safety); RMT is contraindicated regardless of diagnosis.`,
+        thinFact: `Name the principles (consent, autonomy, beneficence, non-maleficence, safety); RMT is contraindicated regardless of diagnosis. Don't dodge on "not my patient" — the counsellor called you; you're in it.`,
       },
     ],
   },
@@ -94308,7 +94315,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v40 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v43 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
