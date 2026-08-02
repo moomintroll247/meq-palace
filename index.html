@@ -2145,7 +2145,15 @@ const PERSONALITY_STATIONS = [
 
 **ICD-11** has dropped categorical PD types in favour of a **dimensional severity** model (mild / moderate / severe) with optional trait specifiers (negative affectivity, detachment, dissociality, disinhibition, anankastia, borderline pattern).
 
-RANZCP teaches both — know both.`,
+RANZCP teaches both — know both.
+
+**The rapid screen — SAPAS** (Standardised Assessment of Personality, Abbreviated Scale): **8 yes/no items, ~2 minutes, positive at ≥3**. The items — difficulty making and keeping friends · describes self as a loner · does not trust others · loses temper easily · impulsive · a worrier · depends on others a lot · perfectionist.
+
+A positive SAPAS means **"do a full personality assessment"** — it does **not** diagnose. Confirm with a **structured interview** (SCID-5-PD, IPDE) + **longitudinal** history across settings and time + **collateral**.
+
+BPD-specific alternative: **MSI-BPD** (10 items, positive at ≥7). ICD-11 severity framing: **SASPD**.
+
+**Never diagnose a personality disorder in a crisis** — acute distress, intoxication or a depressive episode inflate every one of those eight items.`,
     why:  `### Justifications
 
 - **DSM-5 general criteria (A–F)** must all be satisfied — pattern, pervasiveness, distress/impairment, **adolescence/early-adulthood onset**, not better explained by another disorder, not substance/organic. Skipping any gate loses the diagnosis.
@@ -2153,7 +2161,11 @@ RANZCP teaches both — know both.`,
 - **Cluster-based thinking** (A odd/eccentric, B dramatic/erratic, C anxious/fearful) structures the differential and pairs with cluster-specific treatment.
 - **ICD-11 dimensional model** (severity + trait specifiers, with retained "borderline pattern") is current practice — RANZCP expects fluency in both DSM-5 and ICD-11.
 - **Rule out substance / medical / other mental disorder** before labelling PD — premature PD diagnosis is stigmatising and follows the patient.
-- **Functional impairment** must be documented — trait without impairment is not disorder.` },
+- **Functional impairment** must be documented — trait without impairment is not disorder.
+- **Name a screening instrument, then name its limit.** "A brief screen such as the **SAPAS** — 8 items, positive at ≥3" earns the scale mark; the sentence that follows — *it identifies the need for further assessment, it does not diagnose* — is what reads as consultant-level rather than trainee-level.
+- **A personality diagnosis is a pattern claim, not a cross-sectional one** — which is why a positive screen buys you a structured interview (SCID-5-PD, IPDE), longitudinal history and collateral, not a label. One interview cannot establish "enduring since adolescence".
+- **Screening tools over-identify** — SAPAS was built for sensitivity, and its specificity is the weaker half; quote the **cut-off**, not the psychometrics.
+- **Don't diagnose in crisis** — the presentation is state-dependent; assessing during acute distress, intoxication or a depressive episode manufactures a false positive and the stigma outlives the episode.` },
   { id: 2, world: 'personality', name: 'II. The Tornado', pos: [-7, 1601.7, 22],
     what: `### Aetiology & formulation — biopsychosocial.
 
@@ -94315,7 +94327,7 @@ function animate() {
     const fps = Math.round(fpsFrames * 1000 / (time - fpsLast));
     const info = renderer.info.render;
     const tris = info.triangles >= 1000 ? (info.triangles / 1000).toFixed(1) + 'k' : info.triangles;
-    fpsEl.textContent = `v43 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
+    fpsEl.textContent = `v44 · ${fps} fps · ${tris} tris · ${info.calls} calls`;
     fpsFrames = 0; fpsLast = time;
   }
 
